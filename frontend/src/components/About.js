@@ -345,13 +345,11 @@ const About = () => {
                       fontSize: '1.1rem',
                     }}
                   >
-                    Experienced Data Analyst with 7+ years of expertise in transforming complex data into actionable business insights.
-                    Currently driving data analytics initiatives at Nike, where I analyze user behavior and CRM data to optimize
-                    marketing campaigns and improve customer engagement. My diverse background spans from Mechanical Engineering
-                    to advanced degrees in Business Administration and Engineering Management, providing a unique perspective
-                    on data-driven decision making. I excel in SQL/Python programming, Power BI/Tableau visualization,
-                    and statistical analysis, with proven success in reducing operational costs, improving process efficiency,
-                    and enhancing business performance across manufacturing, media production, and retail sectors.
+                    Data Analyst with 4+ years of experience solving business problems through exploratory analysis, A/B testing, and statistical modeling.
+                    Proficient in Python, PySpark, SQL, Tableau, and Power BI, with expertise in building data pipelines, analyzing customer behavior, and
+                    delivering insights that drive impact. Achievements include a 15% GMV boost, 40% improvement in reporting accuracy, and 15% increase in
+                    on-time delivery. Skilled at translating data into actionable insights for business leaders, mentoring analysts, and collaborating with cross-
+                    functional teams in retail, e-commerce, media, and manufacturing.
               </Typography>
                   <Stack direction="row" flexWrap="wrap" gap={1.5} justifyContent="center">
                     {skills.map((skill, index) => (

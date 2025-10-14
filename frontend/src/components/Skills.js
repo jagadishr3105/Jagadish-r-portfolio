@@ -250,13 +250,13 @@ const Skills = () => {
               {
                 title: 'Tableau',
                 issuer: 'Udemy',
-                year: '2022',
+                year: '2023',
                 description: 'Data visualization and business intelligence certification',
               },
               {
                 title: 'Executing Basic ERP Processes with SAP S/4HANA',
                 issuer: 'SAP',
-                year: '2021',
+                year: '2024',
                 description: 'Enterprise resource planning and business process certification',
               },
               {
