@@ -6,7 +6,6 @@ import {
   Grid,
   Card,
   CardContent,
-  LinearProgress,
   Stack,
 } from '@mui/material';
 import {
