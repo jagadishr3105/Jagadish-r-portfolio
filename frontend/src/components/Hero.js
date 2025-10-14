@@ -97,15 +97,18 @@ const Hero = () => {
                 </Box>
               }
               sx={{
-                background: 'linear-gradient(135deg, #6B73FF 0%, #81C784 100%)',
-                color: 'white',
+                background: 'transparent',
+                color: 'text.primary',
                 fontWeight: 500,
                 fontSize: '0.9rem',
                 px: 3,
                 py: 1,
                 mb: 3,
-                boxShadow: '0 4px 20px rgba(107, 115, 255, 0.3)',
+                border: '2px solid #6B73FF',
                 borderRadius: '20px',
+                '&:hover': {
+                  backgroundColor: 'rgba(107, 115, 255, 0.1)',
+                },
               }}
             />
           </motion.div>
@@ -222,7 +225,7 @@ const Hero = () => {
                   View My Work
                 </Button>
                 <Button
-                  className="soft-button"
+                  className="soft-button-outline"
                   size="large"
                   onClick={() => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })}
                   sx={{

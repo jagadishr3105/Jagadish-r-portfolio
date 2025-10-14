@@ -242,28 +242,28 @@ const Skills = () => {
           <Grid container spacing={3} justifyContent="center">
             {[
               {
-                title: 'AWS Certified Data Analytics',
-                issuer: 'Amazon Web Services',
+                title: 'Lean Six Sigma Yellow Belt',
+                issuer: 'AIGPE',
                 year: '2023',
-                description: 'Specialty certification in data analytics on AWS platform',
+                description: 'Process improvement and quality management certification',
               },
               {
-                title: 'Tableau Desktop Specialist',
-                issuer: 'Tableau Software',
+                title: 'Tableau',
+                issuer: 'Udemy',
                 year: '2022',
-                description: 'Certified in Tableau desktop visualization and analytics',
+                description: 'Data visualization and business intelligence certification',
               },
               {
-                title: 'Google Data Analytics Certificate',
-                issuer: 'Google',
+                title: 'Executing Basic ERP Processes with SAP S/4HANA',
+                issuer: 'SAP',
                 year: '2021',
-                description: 'Professional certificate in data analytics fundamentals',
+                description: 'Enterprise resource planning and business process certification',
               },
               {
-                title: 'Microsoft Certified: Data Analyst Associate',
-                issuer: 'Microsoft',
-                year: '2022',
-                description: 'Power BI and Excel data analysis certification',
+                title: 'Introduction to Python',
+                issuer: 'University of Michigan',
+                year: '2020',
+                description: 'Programming fundamentals and data analysis certification',
               },
             ].map((cert, index) => (
               <Grid item xs={12} sm={6} md={3} key={cert.title}>

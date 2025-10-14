@@ -183,32 +183,6 @@ const About = () => {
     },
   ];
 
-  const certifications = [
-    {
-      name: 'Lean Six Sigma Yellow Belt',
-      issuer: 'AIGPE',
-      year: '2023',
-      color: '#6B73FF',
-    },
-    {
-      name: 'Tableau',
-      issuer: 'Udemy',
-      year: '2022',
-      color: '#81C784',
-    },
-    {
-      name: 'Executing Basic ERP Processes with SAP S/4HANA',
-      issuer: 'SAP',
-      year: '2021',
-      color: '#6B73FF',
-    },
-    {
-      name: 'Introduction to Python',
-      issuer: 'University of Michigan',
-      year: '2020',
-      color: '#81C784',
-    },
-  ];
 
   const programmingSkills = [
     { name: 'Python', level: 95, color: '#6B73FF' },
@@ -371,14 +345,13 @@ const About = () => {
                       fontSize: '1.1rem',
                     }}
                   >
-                    I'm a dedicated Data Analyst with over 7 years of experience across diverse industries,
-                    currently working at Nike where I analyze user behavior and CRM data to drive business insights.
-                    My journey began with a Mechanical Engineering background and evolved through an MBA and MS in
-                    Engineering Management, leading to expertise in data analysis, operations optimization, and
-                    business intelligence. I specialize in SQL/Python analytics, Power BI/Tableau dashboards, and
-                    A/B testing frameworks. My experience spans manufacturing operations, media production, and
-                    consumer retail, where I've consistently delivered measurable improvements in efficiency,
-                    cost reduction, and strategic decision-making through data-driven approaches.
+                    Experienced Data Analyst with 7+ years of expertise in transforming complex data into actionable business insights.
+                    Currently driving data analytics initiatives at Nike, where I analyze user behavior and CRM data to optimize
+                    marketing campaigns and improve customer engagement. My diverse background spans from Mechanical Engineering
+                    to advanced degrees in Business Administration and Engineering Management, providing a unique perspective
+                    on data-driven decision making. I excel in SQL/Python programming, Power BI/Tableau visualization,
+                    and statistical analysis, with proven success in reducing operational costs, improving process efficiency,
+                    and enhancing business performance across manufacturing, media production, and retail sectors.
               </Typography>
                   <Stack direction="row" flexWrap="wrap" gap={1.5} justifyContent="center">
                     {skills.map((skill, index) => (
@@ -965,84 +938,6 @@ const About = () => {
               </Grid>
             </Grid>
 
-            {/* Certifications Section */}
-            <Box sx={{ mt: 6, width: '100%' }}>
-              <Typography
-                variant="h4"
-                sx={{
-                  mb: 4,
-                  fontWeight: 300,
-                  color: 'text.primary',
-                  textAlign: 'center',
-                }}
-              >
-                Professional <span className="gradient-text">Certifications</span>
-              </Typography>
-              <Grid container spacing={3} justifyContent="center">
-                {certifications.map((cert, index) => (
-                  <Grid item xs={12} sm={6} md={3} key={cert.name}>
-                    <motion.div
-                      initial={{ opacity: 0, y: 30 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.6, delay: index * 0.1 }}
-                      viewport={{ once: true }}
-                    >
-                      <Card
-                        className="soothing-card"
-                        sx={{
-                          textAlign: 'center',
-                          p: 3,
-                          height: '100%',
-                          display: 'flex',
-                          flexDirection: 'column',
-                          justifyContent: 'center',
-                          border: `2px solid ${cert.color}20`,
-                          '&:hover': {
-                            border: `2px solid ${cert.color}`,
-                            transform: 'translateY(-5px)',
-                            boxShadow: `0 8px 25px ${cert.color}30`,
-                          },
-                          transition: 'all 0.3s ease',
-                        }}
-                      >
-                        <CardContent>
-                          <Typography
-                            variant="h6"
-                            sx={{
-                              fontWeight: 500,
-                              color: 'text.primary',
-                              mb: 1,
-                              fontSize: '1rem',
-                            }}
-                          >
-                            {cert.name}
-                          </Typography>
-                          <Typography
-                            variant="body2"
-                            sx={{
-                              color: cert.color,
-                              fontWeight: 500,
-                              mb: 0.5,
-                            }}
-                          >
-                            {cert.issuer}
-                          </Typography>
-                          <Typography
-                            variant="body2"
-                            sx={{
-                              color: 'text.secondary',
-                              fontSize: '0.9rem',
-                            }}
-                          >
-                            {cert.year}
-                          </Typography>
-                        </CardContent>
-                      </Card>
-                    </motion.div>
-                  </Grid>
-                ))}
-              </Grid>
-            </Box>
           </Box>
         </TabPanel>
       </Container>
