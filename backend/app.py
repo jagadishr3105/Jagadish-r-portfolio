@@ -167,7 +167,7 @@ def internal_error(error):
     }), 500
 
 if __name__ == '__main__':
-    port = int(os.getenv('PORT', 5001))  # Changed from 5000 to 5001
+    port = int(os.getenv('PORT', 8000))  # Changed to port 8000
     debug = os.getenv('FLASK_ENV') == 'development'
     
     app.run(

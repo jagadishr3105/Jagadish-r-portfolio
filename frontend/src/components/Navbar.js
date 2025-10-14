@@ -13,7 +13,7 @@ import {
   useMediaQuery,
   useTheme,
 } from '@mui/material';
-import { Menu as MenuIcon, Close as CloseIcon } from '@mui/icons-material';
+import { Menu as MenuIcon, Close as CloseIcon, Download } from '@mui/icons-material';
 import { motion } from 'framer-motion';
 
 const Navbar = () => {
@@ -27,7 +27,6 @@ const Navbar = () => {
     { name: 'About', href: '#about' },
     { name: 'Projects', href: '#projects' },
     { name: 'Skills', href: '#skills' },
-    { name: 'Experience', href: '#experience' },
     { name: 'Contact', href: '#contact' },
   ];
 
@@ -53,14 +52,27 @@ const Navbar = () => {
     setMobileOpen(false);
   };
 
+  const handleDownloadResume = () => {
+    const resumeUrl = '/resume.pdf';
+    const link = document.createElement('a');
+    link.href = resumeUrl;
+    link.download = 'Jagadish_R_Resume.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   const drawer = (
-    <Box sx={{ width: 250, height: '100%', backgroundColor: 'background.paper' }}>
-      <Box sx={{ display: 'flex', justifyContent: 'flex-end', p: 2 }}>
-        <IconButton onClick={handleDrawerToggle} sx={{ color: 'text.primary' }}>
+    <Box sx={{ width: 280, height: '100%', backgroundColor: 'background.paper' }}>
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', p: 2 }}>
+        <Typography variant="h6" sx={{ fontWeight: 500, color: 'text.primary' }}>
+          Jagadish R
+        </Typography>
+        <IconButton onClick={handleDrawerToggle} sx={{ color: 'text.secondary' }}>
           <CloseIcon />
         </IconButton>
       </Box>
-      <List>
+      <List sx={{ px: 2 }}>
         {navItems.map((item, index) => (
           <ListItem key={item.name} button onClick={() => scrollToSection(item.href)}>
             <ListItemText
@@ -70,7 +82,7 @@ const Navbar = () => {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.1 }}
                 >
-                  <Typography variant="h6" sx={{ color: 'text.primary' }}>
+                  <Typography variant="h6" sx={{ color: 'text.primary', fontWeight: 400 }}>
                     {item.name}
                   </Typography>
                 </motion.div>
@@ -78,6 +90,32 @@ const Navbar = () => {
             />
           </ListItem>
         ))}
+
+        {/* Download Resume Button in Mobile */}
+        <ListItem sx={{ mt: 2 }}>
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.6 }}
+            style={{ width: '100%' }}
+          >
+            <Button
+              className="soft-button"
+              startIcon={<Download />}
+              onClick={handleDownloadResume}
+              fullWidth
+              sx={{
+                py: 1.5,
+                fontSize: '1rem',
+                fontWeight: 500,
+                textTransform: 'none',
+                borderRadius: '25px',
+              }}
+            >
+              Download Resume
+            </Button>
+          </motion.div>
+        </ListItem>
       </List>
     </Box>
   );
@@ -87,13 +125,14 @@ const Navbar = () => {
       <AppBar
         position="fixed"
         sx={{
-          backgroundColor: scrolled ? 'rgba(10, 25, 47, 0.95)' : 'transparent',
-          backdropFilter: scrolled ? 'blur(10px)' : 'none',
+          backgroundColor: scrolled ? 'rgba(255, 255, 255, 0.95)' : 'rgba(255, 255, 255, 0.8)',
+          backdropFilter: scrolled ? 'blur(20px)' : 'blur(10px)',
           transition: 'all 0.3s ease',
-          boxShadow: scrolled ? '0 4px 20px rgba(0, 0, 0, 0.3)' : 'none',
+          boxShadow: scrolled ? '0 4px 20px rgba(107, 115, 255, 0.1)' : 'none',
+          borderBottom: '1px solid rgba(107, 115, 255, 0.1)',
         }}
       >
-        <Toolbar sx={{ justifyContent: 'space-between' }}>
+        <Toolbar sx={{ justifyContent: 'space-between', py: 1 }}>
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -103,15 +142,16 @@ const Navbar = () => {
               variant="h5"
               component="div"
               sx={{
-                fontWeight: 700,
-                background: 'linear-gradient(135deg, #64ffda 0%, #f50057 100%)',
+                fontWeight: 500,
+                background: 'linear-gradient(135deg, #6B73FF 0%, #81C784 100%)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 cursor: 'pointer',
+                fontSize: '1.5rem',
               }}
               onClick={() => scrollToSection('#home')}
             >
-              DA
+              Jagadish R
             </Typography>
           </motion.div>
 
@@ -121,11 +161,12 @@ const Navbar = () => {
               aria-label="open drawer"
               edge="start"
               onClick={handleDrawerToggle}
+              sx={{ color: 'text.primary' }}
             >
               <MenuIcon />
             </IconButton>
           ) : (
-            <Box sx={{ display: 'flex', gap: 2 }}>
+            <Box sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
               {navItems.map((item, index) => (
                 <motion.div
                   key={item.name}
@@ -139,11 +180,14 @@ const Navbar = () => {
                       color: 'text.primary',
                       textTransform: 'none',
                       fontSize: '1rem',
-                      fontWeight: 500,
+                      fontWeight: 400,
                       position: 'relative',
+                      px: 2,
+                      py: 1,
+                      borderRadius: '20px',
                       '&:hover': {
                         color: 'primary.main',
-                        backgroundColor: 'transparent',
+                        backgroundColor: 'rgba(107, 115, 255, 0.1)',
                       },
                       '&::after': {
                         content: '""',
@@ -155,9 +199,10 @@ const Navbar = () => {
                         backgroundColor: 'primary.main',
                         transition: 'all 0.3s ease',
                         transform: 'translateX(-50%)',
+                        borderRadius: '1px',
                       },
                       '&:hover::after': {
-                        width: '100%',
+                        width: '80%',
                       },
                     }}
                   >
@@ -165,6 +210,30 @@ const Navbar = () => {
                   </Button>
                 </motion.div>
               ))}
+
+              {/* Download Resume Button */}
+              <motion.div
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.6 }}
+              >
+                <Button
+                  className="soft-button"
+                  startIcon={<Download />}
+                  onClick={handleDownloadResume}
+                  sx={{
+                    px: 3,
+                    py: 1,
+                    fontSize: '0.9rem',
+                    fontWeight: 500,
+                    textTransform: 'none',
+                    borderRadius: '25px',
+                    ml: 2,
+                  }}
+                >
+                  Download Resume
+                </Button>
+              </motion.div>
             </Box>
           )}
         </Toolbar>
@@ -182,8 +251,9 @@ const Navbar = () => {
           display: { xs: 'block', md: 'none' },
           '& .MuiDrawer-paper': {
             boxSizing: 'border-box',
-            width: 250,
+            width: 280,
             backgroundColor: 'background.paper',
+            borderLeft: '1px solid rgba(107, 115, 255, 0.1)',
           },
         }}
       >

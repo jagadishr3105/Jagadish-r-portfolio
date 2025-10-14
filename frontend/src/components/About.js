@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Box,
   Container,
@@ -8,44 +8,214 @@ import {
   CardContent,
   Chip,
   Stack,
-  Avatar,
+  Tabs,
+  Tab,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  IconButton,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
 } from '@mui/material';
 import {
   School,
-  Psychology,
+  Work,
+  Code,
+  Analytics,
+  Close,
+  Star,
+  CheckCircle,
   TrendingUp,
   DataUsage,
+  Psychology,
 } from '@mui/icons-material';
 import { motion } from 'framer-motion';
 
+// Helper component for Tab content
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box sx={{ p: 3 }}>
+          {children}
+        </Box>
+      )}
+    </div>
+  );
+}
+
 const About = () => {
-  const techStack = [
-    'Python', 'R', 'SQL', 'Tableau', 'Power BI', 'Excel',
-    'Pandas', 'NumPy', 'Matplotlib', 'Seaborn', 'Plotly',
-    'Jupyter', 'Git', 'AWS', 'Google Analytics', 'SPSS'
+  const [activeTab, setActiveTab] = useState(0);
+  const [openExperienceModal, setOpenExperienceModal] = useState(false);
+  const [selectedExperience, setSelectedExperience] = useState(null);
+  const [openEducationModal, setOpenEducationModal] = useState(false);
+  const [selectedEducation, setSelectedEducation] = useState(null);
+
+  const handleTabChange = (event, newValue) => {
+    setActiveTab(newValue);
+  };
+
+  const handleOpenExperienceModal = (exp) => {
+    setSelectedExperience(exp);
+    setOpenExperienceModal(true);
+  };
+
+  const handleCloseExperienceModal = () => {
+    setOpenExperienceModal(false);
+    setSelectedExperience(null);
+  };
+
+  const handleOpenEducationModal = (edu) => {
+    setSelectedEducation(edu);
+    setOpenEducationModal(true);
+  };
+
+  const handleCloseEducationModal = () => {
+    setOpenEducationModal(false);
+    setSelectedEducation(null);
+  };
+
+  const skills = [
+    'Data Analysis', 'Machine Learning', 'Python', 'Statistics', 
+    'R', 'SQL', 'Tableau', 'Power BI', 'ETL', 'AWS', 'GCP', 'Azure'
   ];
 
-  const interests = [
+  const experience = [
     {
-      icon: <DataUsage />,
-      title: 'Data Visualization',
-      description: 'Creating compelling visual stories from complex datasets'
+      id: 1,
+      title: 'Senior Data Analyst',
+      company: 'TechCorp Solutions',
+      location: 'San Francisco, CA',
+      period: '2022 - Present',
+      type: 'Full-time',
+      description: 'Leading data analytics initiatives for a Fortune 500 technology company, focusing on customer behavior analysis and business intelligence.',
+      achievements: [
+        'Developed automated reporting system that reduced manual work by 75%',
+        'Built predictive models that improved customer retention by 23%',
+        'Led cross-functional team of 5 analysts on major data migration project',
+        'Created executive dashboards used by C-level leadership for strategic decisions',
+        'Implemented A/B testing framework that increased conversion rates by 18%',
+      ],
+      technologies: ['Python', 'Tableau', 'SQL', 'AWS', 'Snowflake', 'Git'],
+      color: '#6B73FF',
     },
     {
-      icon: <TrendingUp />,
-      title: 'Predictive Analytics',
-      description: 'Building models to forecast trends and business outcomes'
+      id: 2,
+      title: 'Data Analyst',
+      company: 'FinanceFirst Bank',
+      location: 'New York, NY',
+      period: '2020 - 2022',
+      type: 'Full-time',
+      description: 'Specialized in financial data analysis, risk assessment, and regulatory reporting for a mid-size regional bank.',
+      achievements: [
+        'Designed fraud detection system that reduced false positives by 40%',
+        'Automated monthly regulatory reports, saving 20 hours per month',
+        'Performed credit risk analysis for loan portfolio worth $500M',
+        'Created real-time monitoring dashboard for transaction anomalies',
+        'Collaborated with compliance team on stress testing models',
+      ],
+      technologies: ['R', 'Power BI', 'SQL Server', 'Excel', 'SAS', 'Python'],
+      color: '#81C784',
     },
     {
-      icon: <Psychology />,
-      title: 'Business Intelligence',
-      description: 'Transforming data into actionable business insights'
+      id: 3,
+      title: 'Junior Data Analyst',
+      company: 'RetailMax Inc.',
+      location: 'Chicago, IL',
+      period: '2019 - 2020',
+      type: 'Full-time',
+      description: 'Entry-level position focusing on sales analytics, inventory optimization, and customer segmentation for retail operations.',
+      achievements: [
+        'Analyzed sales data across 200+ retail locations',
+        'Developed customer segmentation model using RFM analysis',
+        'Created inventory forecasting model that reduced stockouts by 15%',
+        'Built weekly sales performance reports for regional managers',
+        'Assisted in migration from legacy reporting system to modern BI tools',
+      ],
+      technologies: ['Excel', 'Tableau', 'SQL', 'Python', 'Google Analytics'],
+      color: '#6B73FF',
+    },
+  ];
+
+  const education = [
+    {
+      degree: 'Master of Science in Data Science',
+      institution: 'University of Technology',
+      period: '2020-2022',
+      description: 'Specialized in Machine Learning, Statistical Analysis, and Big Data Technologies',
+      gpa: '3.9/4.0',
+      relevantCoursework: ['Advanced Machine Learning', 'Big Data Analytics', 'Statistical Modeling', 'Data Visualization'],
+      color: '#81C784',
     },
     {
-      icon: <School />,
-      title: 'Statistical Analysis',
-      description: 'Applying statistical methods to solve real-world problems'
-    }
+      degree: 'Bachelor of Science in Statistics',
+      institution: 'University Name',
+      period: '2016-2020',
+      description: 'Focus on Applied Statistics, Probability Theory, and Research Methods',
+      gpa: '3.7/4.0',
+      relevantCoursework: ['Probability & Statistics', 'Regression Analysis', 'Time Series Analysis', 'Sampling Techniques'],
+      color: '#6B73FF',
+    },
+    {
+      degree: 'Data Analytics Certification',
+      institution: 'Professional Institute',
+      period: '2018-2019',
+      description: 'Comprehensive certification program covering modern data analytics tools and techniques',
+      gpa: '4.0/4.0',
+      relevantCoursework: ['SQL Fundamentals', 'Data Visualization', 'Statistical Analysis', 'Business Intelligence'],
+      color: '#81C784',
+    },
+  ];
+
+  const programmingSkills = [
+    { name: 'Python', level: 95, color: '#6B73FF' },
+    { name: 'SQL', level: 90, color: '#81C784' },
+    { name: 'R', level: 85, color: '#6B73FF' },
+    { name: 'JavaScript', level: 80, color: '#81C784' },
+  ];
+
+  const toolsSkills = [
+    { name: 'Tableau', level: 95, color: '#81C784' },
+    { name: 'Power BI', level: 90, color: '#6B73FF' },
+    { name: 'Excel', level: 85, color: '#81C784' },
+    { name: 'AWS', level: 80, color: '#6B73FF' },
+  ];
+
+  const areasOfInterest = [
+    {
+      icon: <DataUsage sx={{ fontSize: '2.5rem' }} />,
+      title: 'Financial Analytics',
+      description: 'Analyzing market trends, risk assessment, and investment strategies.',
+      color: '#6B73FF',
+    },
+    {
+      icon: <TrendingUp sx={{ fontSize: '2.5rem' }} />,
+      title: 'Machine Learning',
+      description: 'Building predictive models and intelligent systems for various applications.',
+      color: '#81C784',
+    },
+    {
+      icon: <Psychology sx={{ fontSize: '2.5rem' }} />,
+      title: 'Supply Chain Analytics',
+      description: 'Optimizing logistics, inventory, and operational efficiency.',
+      color: '#6B73FF',
+    },
+    {
+      icon: <Analytics sx={{ fontSize: '2.5rem' }} />,
+      title: 'Healthcare Analytics',
+      description: 'Patient outcomes, medical research insights, and operational improvements.',
+      color: '#81C784',
+    },
   ];
 
   return (
@@ -53,7 +223,7 @@ const About = () => {
       id="about"
       className="section-padding"
       sx={{
-        backgroundColor: 'background.default',
+        backgroundColor: 'transparent',
         py: { xs: 8, md: 12 },
       }}
     >
@@ -69,7 +239,7 @@ const About = () => {
             sx={{
               textAlign: 'center',
               mb: 2,
-              fontWeight: 700,
+              fontWeight: 300,
               color: 'text.primary',
             }}
           >
@@ -83,265 +253,829 @@ const About = () => {
               mb: 8,
               maxWidth: '600px',
               mx: 'auto',
+              fontSize: '1.1rem',
+              lineHeight: 1.7,
             }}
           >
-            Get to know more about my background, skills, and what drives my passion for data analysis
+            Passionate about transforming data into meaningful insights that drive business success
           </Typography>
         </motion.div>
 
-        <Grid container spacing={6} alignItems="center">
-          {/* Left Side - Image and Bio */}
-          <Grid item xs={12} md={6}>
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-            >
-              <Box sx={{ textAlign: 'center', mb: 4 }}>
-                <Avatar
-                  src="/api/placeholder/250/250"
-                  alt="About Me"
-                  sx={{
-                    width: 250,
-                    height: 250,
-                    mx: 'auto',
-                    mb: 3,
-                    border: '3px solid',
-                    borderColor: 'primary.main',
-                    boxShadow: '0 0 30px rgba(100, 255, 218, 0.2)',
-                  }}
-                />
-              </Box>
-              
-              <Typography
-                variant="body1"
-                sx={{
-                  color: 'text.secondary',
-                  lineHeight: 1.8,
-                  mb: 3,
-                }}
-              >
-                I'm a passionate Data Analyst with over 3 years of experience in transforming 
-                raw data into meaningful insights that drive business decisions. My journey began 
-                with a degree in Statistics and has evolved into a career focused on uncovering 
-                patterns, trends, and opportunities hidden within data.
-              </Typography>
-              
-              <Typography
-                variant="body1"
-                sx={{
-                  color: 'text.secondary',
-                  lineHeight: 1.8,
-                  mb: 3,
-                }}
-              >
-                I specialize in creating interactive dashboards, performing statistical analysis, 
-                and building predictive models. My expertise spans across various industries 
-                including finance, healthcare, and e-commerce, where I've helped organizations 
-                increase efficiency and profitability through data-driven strategies.
-              </Typography>
-
-              <Typography
-                variant="body1"
-                sx={{
-                  color: 'text.secondary',
-                  lineHeight: 1.8,
-                }}
-              >
-                When I'm not analyzing data, you can find me exploring new visualization 
-                techniques, contributing to open-source projects, or sharing insights 
-                through technical blog posts and community presentations.
-              </Typography>
-            </motion.div>
-          </Grid>
-
-          {/* Right Side - Skills and Interests */}
-          <Grid item xs={12} md={6}>
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-            >
-              {/* Education */}
-              <Box sx={{ mb: 4 }}>
-                <Typography
-                  variant="h4"
-                  sx={{
-                    mb: 2,
-                    fontWeight: 600,
-                    color: 'text.primary',
-                  }}
-                >
-                  Education
-                </Typography>
-                <Card
-                  sx={{
-                    backgroundColor: 'background.paper',
-                    border: '1px solid rgba(100, 255, 218, 0.2)',
-                    mb: 2,
-                  }}
-                >
-                  <CardContent>
-                    <Typography variant="h6" sx={{ color: 'primary.main', mb: 1 }}>
-                      Master of Science in Data Science
-                    </Typography>
-                    <Typography variant="body2" sx={{ color: 'text.secondary', mb: 1 }}>
-                      University Name • 2020-2022
-                    </Typography>
-                    <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                      Specialized in Machine Learning, Statistical Analysis, and Big Data Technologies
-                    </Typography>
-                  </CardContent>
-                </Card>
-                
-                <Card
-                  sx={{
-                    backgroundColor: 'background.paper',
-                    border: '1px solid rgba(100, 255, 218, 0.2)',
-                  }}
-                >
-                  <CardContent>
-                    <Typography variant="h6" sx={{ color: 'primary.main', mb: 1 }}>
-                      Bachelor of Science in Statistics
-                    </Typography>
-                    <Typography variant="body2" sx={{ color: 'text.secondary', mb: 1 }}>
-                      University Name • 2016-2020
-                    </Typography>
-                    <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                      Focus on Applied Statistics, Probability Theory, and Research Methods
-                    </Typography>
-                  </CardContent>
-                </Card>
-              </Box>
-
-              {/* Tech Stack */}
-              <Box sx={{ mb: 4 }}>
-                <Typography
-                  variant="h4"
-                  sx={{
-                    mb: 2,
-                    fontWeight: 600,
-                    color: 'text.primary',
-                  }}
-                >
-                  Tech Stack
-                </Typography>
-                <Stack direction="row" flexWrap="wrap" gap={1}>
-                  {techStack.map((tech, index) => (
-                    <motion.div
-                      key={tech}
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      transition={{ duration: 0.3, delay: index * 0.05 }}
-                      viewport={{ once: true }}
-                    >
-                      <Chip
-                        label={tech}
-                        sx={{
-                          backgroundColor: 'rgba(100, 255, 218, 0.1)',
-                          color: 'primary.main',
-                          border: '1px solid rgba(100, 255, 218, 0.3)',
-                          fontWeight: 500,
-                          '&:hover': {
-                            backgroundColor: 'rgba(100, 255, 218, 0.2)',
-                            transform: 'translateY(-2px)',
-                          },
-                          transition: 'all 0.3s ease',
-                        }}
-                      />
-                    </motion.div>
-                  ))}
-                </Stack>
-              </Box>
-            </motion.div>
-          </Grid>
-        </Grid>
-
-        {/* Interests Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-        >
-          <Typography
-            variant="h4"
+        {/* Tabs - Centered */}
+        <Box sx={{ width: '100%', mb: 6, display: 'flex', justifyContent: 'center' }}>
+          <Tabs
+            value={activeTab}
+            onChange={handleTabChange}
+            centered
+            variant="scrollable"
+            scrollButtons="auto"
+            aria-label="about me tabs"
             sx={{
-              textAlign: 'center',
-              mt: 8,
               mb: 4,
-              fontWeight: 600,
-              color: 'text.primary',
+              '& .MuiTabs-indicator': {
+                backgroundColor: 'primary.main',
+                height: 3,
+                borderRadius: '5px',
+              },
+              '& .MuiTab-root': {
+                color: 'text.secondary',
+                fontWeight: 500,
+                fontSize: { xs: '0.8rem', sm: '1rem' },
+                mx: { xs: 0.5, sm: 1 },
+                borderRadius: 2,
+                transition: 'all 0.3s ease',
+                '&:hover': {
+                  color: 'primary.main',
+                  backgroundColor: 'rgba(107, 115, 255, 0.1)',
+                },
+                '&.Mui-selected': {
+                  color: 'white',
+                  backgroundColor: 'primary.main',
+                  boxShadow: '0 4px 20px rgba(107, 115, 255, 0.3)',
+                },
+              },
             }}
           >
-            Areas of <span className="gradient-text">Interest</span>
-          </Typography>
-          
-          <Grid container spacing={3}>
-            {interests.map((interest, index) => (
-              <Grid item xs={12} sm={6} md={3} key={interest.title}>
-                <motion.div
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                  whileHover={{ y: -5 }}
-                >
-                  <Card
-                    className="hover-lift"
+            <Tab label="Overview" />
+            <Tab label="Experience" />
+            <Tab label="Education" />
+            <Tab label="Skills" />
+          </Tabs>
+        </Box>
+
+        {/* Overview Tab */}
+        <TabPanel value={activeTab} index={0}>
+          <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+            >
+              <Card className="soothing-card" sx={{ p: 4, mb: 4, maxWidth: '800px', mx: 'auto' }}>
+                <CardContent>
+                  <Typography
+                    variant="h4"
                     sx={{
-                      height: '100%',
-                      backgroundColor: 'background.paper',
-                      border: '1px solid rgba(100, 255, 218, 0.2)',
-                      textAlign: 'center',
-                      p: 2,
-                      '&:hover': {
-                        borderColor: 'primary.main',
-                        boxShadow: '0 10px 30px rgba(100, 255, 218, 0.2)',
-                      },
-                      transition: 'all 0.3s ease',
+                      mb: 3,
+                      fontWeight: 400,
+                      color: 'text.primary',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: 1,
                     }}
                   >
-                    <CardContent>
-                      <Box
+                    <Code sx={{ color: 'primary.main' }} /> Professional Summary
+                  </Typography>
+                  <Typography
+                    variant="body1"
+                    sx={{
+                      color: 'text.secondary',
+                      lineHeight: 1.8,
+                      mb: 3,
+                      textAlign: 'center',
+                      fontSize: '1.1rem',
+                    }}
+                  >
+                    I'm a passionate Data Analyst with over 5 years of experience in transforming
+                    raw data into meaningful insights that drive business decisions. My journey began
+                    with a degree in Statistics and has evolved into a career focused on uncovering
+                    patterns, trends, and opportunities hidden within data. I specialize in creating
+                    interactive dashboards, performing statistical analysis, and building predictive
+                    models. My expertise spans across various industries including finance, healthcare,
+                    and e-commerce, where I've helped organizations increase efficiency and profitability
+                    through data-driven strategies.
+                  </Typography>
+                  <Stack direction="row" flexWrap="wrap" gap={1.5} justifyContent="center">
+                    {skills.map((skill, index) => (
+                      <motion.div
+                        key={skill}
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.3, delay: index * 0.05 }}
+                        viewport={{ once: true }}
+                      >
+                        <Chip
+                          label={skill}
+                          sx={{
+                            backgroundColor: 'rgba(107, 115, 255, 0.1)',
+                            color: 'primary.main',
+                            border: '1px solid rgba(107, 115, 255, 0.2)',
+                            fontWeight: 500,
+                            '&:hover': {
+                              backgroundColor: 'rgba(107, 115, 255, 0.15)',
+                              transform: 'translateY(-2px)',
+                            },
+                            transition: 'all 0.3s ease',
+                          }}
+                        />
+                      </motion.div>
+                    ))}
+                  </Stack>
+                </CardContent>
+              </Card>
+            </motion.div>
+
+            {/* Areas of Interest */}
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+            >
+              <Typography
+                variant="h3"
+                sx={{
+                  textAlign: 'center',
+                  mb: 4,
+                  fontWeight: 300,
+                  color: 'text.primary',
+                }}
+              >
+                Areas of <span className="gradient-text">Interest</span>
+              </Typography>
+
+              <Grid container spacing={3} justifyContent="center">
+                {areasOfInterest.map((interest, index) => (
+                  <Grid item xs={12} sm={6} md={3} key={interest.title}>
+                    <motion.div
+                      initial={{ opacity: 0, y: 30 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.6, delay: index * 0.1 }}
+                      viewport={{ once: true }}
+                      whileHover={{ y: -5 }}
+                    >
+                      <Card
+                        className="soothing-card hover-lift"
                         sx={{
-                          color: 'primary.main',
-                          mb: 2,
-                          display: 'flex',
-                          justifyContent: 'center',
+                          height: '100%',
+                          textAlign: 'center',
+                          p: 2,
                         }}
                       >
-                        {React.cloneElement(interest.icon, { fontSize: 'large' })}
-                      </Box>
-                      <Typography
-                        variant="h6"
-                        sx={{
-                          mb: 2,
-                          fontWeight: 600,
-                          color: 'text.primary',
-                        }}
-                      >
-                        {interest.title}
-                      </Typography>
-                      <Typography
-                        variant="body2"
-                        sx={{
-                          color: 'text.secondary',
-                          lineHeight: 1.6,
-                        }}
-                      >
-                        {interest.description}
-                      </Typography>
-                    </CardContent>
-                  </Card>
-                </motion.div>
+                        <CardContent>
+                          <Box
+                            sx={{
+                              color: interest.color,
+                              mb: 2,
+                              display: 'flex',
+                              justifyContent: 'center',
+                            }}
+                          >
+                            {interest.icon}
+                          </Box>
+                          <Typography
+                            variant="h6"
+                            sx={{
+                              mb: 2,
+                              fontWeight: 500,
+                              color: 'text.primary',
+                            }}
+                          >
+                            {interest.title}
+                          </Typography>
+                          <Typography
+                            variant="body2"
+                            sx={{
+                              color: 'text.secondary',
+                              lineHeight: 1.6,
+                            }}
+                          >
+                            {interest.description}
+                          </Typography>
+                        </CardContent>
+                      </Card>
+                    </motion.div>
+                  </Grid>
+                ))}
               </Grid>
-            ))}
-          </Grid>
-        </motion.div>
+            </motion.div>
+          </Box>
+        </TabPanel>
+
+        {/* Experience Tab */}
+        <TabPanel value={activeTab} index={1}>
+          <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <Typography
+              variant="h3"
+              sx={{
+                mb: 4,
+                fontWeight: 300,
+                color: 'text.primary',
+                textAlign: 'center',
+              }}
+            >
+              Professional <span className="gradient-text">Experience</span>
+            </Typography>
+            <Typography
+              variant="body1"
+              sx={{
+                textAlign: 'center',
+                color: 'text.secondary',
+                mb: 6,
+                maxWidth: '600px',
+                mx: 'auto',
+                fontSize: '1.1rem',
+              }}
+            >
+              My professional journey in data analytics, showcasing growth, impact, and diverse industry experience
+            </Typography>
+
+            {/* Timeline Container */}
+            <Box sx={{ position: 'relative', maxWidth: '1000px', mx: 'auto' }}>
+              {/* Timeline Line */}
+              <Box
+                sx={{
+                  position: 'absolute',
+                  left: '50%',
+                  top: 0,
+                  bottom: 0,
+                  width: '2px',
+                  backgroundColor: 'primary.main',
+                  transform: 'translateX(-50%)',
+                  zIndex: 1,
+                }}
+              />
+
+              {experience.map((exp, index) => (
+                <motion.div
+                  key={exp.id}
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.2 }}
+                  viewport={{ once: true }}
+                >
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      mb: 6,
+                      position: 'relative',
+                    }}
+                  >
+                    {/* Timeline Dot */}
+                    <Box
+                      sx={{
+                        position: 'absolute',
+                        left: '50%',
+                        transform: 'translateX(-50%)',
+                        width: 20,
+                        height: 20,
+                        borderRadius: '50%',
+                        backgroundColor: exp.color,
+                        border: '4px solid white',
+                        boxShadow: '0 0 0 4px rgba(107, 115, 255, 0.2)',
+                        zIndex: 2,
+                      }}
+                    />
+
+                    {/* Content Card */}
+                    <Box
+                      sx={{
+                        width: '45%',
+                        ...(index % 2 === 0 ? { marginLeft: 'auto' } : { marginRight: 'auto' }),
+                      }}
+                    >
+                      <Card
+                        className="soothing-card hover-lift"
+                        sx={{
+                          borderRadius: 3,
+                          cursor: 'pointer',
+                          ...(index % 2 === 0 ? { ml: 2 } : { mr: 2 }),
+                        }}
+                        onClick={() => handleOpenExperienceModal(exp)}
+                      >
+                        <CardContent sx={{ p: 4 }}>
+                          <Box
+                            sx={{
+                              display: 'flex',
+                              alignItems: 'center',
+                              mb: 2,
+                              gap: 2,
+                            }}
+                          >
+                            <Box
+                              sx={{
+                                width: 50,
+                                height: 50,
+                                borderRadius: '50%',
+                                backgroundColor: exp.color,
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                color: 'white',
+                              }}
+                            >
+                              <Work />
+                            </Box>
+                            <Box sx={{ flex: 1 }}>
+                              <Typography
+                                variant="h5"
+                                sx={{
+                                  fontWeight: 400,
+                                  color: 'text.primary',
+                                  mb: 0.5,
+                                }}
+                              >
+                                {exp.title}
+                              </Typography>
+                              <Typography
+                                variant="h6"
+                                sx={{
+                                  color: 'primary.main',
+                                  fontWeight: 500,
+                                  mb: 0.5,
+                                }}
+                              >
+                                {exp.company}
+                              </Typography>
+                              <Typography
+                                variant="body2"
+                                sx={{
+                                  color: 'text.secondary',
+                                }}
+                              >
+                                {exp.location} • {exp.period}
+                              </Typography>
+                            </Box>
+                          </Box>
+
+                          <Typography
+                            variant="body1"
+                            sx={{
+                              color: 'text.secondary',
+                              mb: 3,
+                              lineHeight: 1.7,
+                            }}
+                          >
+                            {exp.description}
+                          </Typography>
+
+                          <Stack direction="row" flexWrap="wrap" gap={1}>
+                            {exp.technologies.slice(0, 3).map((tech, idx) => (
+                              <Chip
+                                key={idx}
+                                label={tech}
+                                size="small"
+                                sx={{
+                                  backgroundColor: 'rgba(107, 115, 255, 0.1)',
+                                  color: 'text.secondary',
+                                  '&:hover': {
+                                    backgroundColor: 'rgba(107, 115, 255, 0.15)',
+                                    color: 'primary.main',
+                                  },
+                                  transition: 'all 0.3s ease',
+                                }}
+                              />
+                            ))}
+                            {exp.technologies.length > 3 && (
+                              <Chip
+                                label={`+${exp.technologies.length - 3} more`}
+                                size="small"
+                                sx={{
+                                  backgroundColor: 'rgba(107, 115, 255, 0.1)',
+                                  color: 'text.secondary',
+                                }}
+                              />
+                            )}
+                          </Stack>
+                        </CardContent>
+                      </Card>
+                    </Box>
+                  </Box>
+                </motion.div>
+              ))}
+            </Box>
+          </Box>
+        </TabPanel>
+
+        {/* Education Tab */}
+        <TabPanel value={activeTab} index={2}>
+          <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <Typography
+              variant="h3"
+              sx={{
+                mb: 4,
+                fontWeight: 300,
+                color: 'text.primary',
+                textAlign: 'center',
+              }}
+            >
+              My <span className="gradient-text">Education</span>
+            </Typography>
+            <Typography
+              variant="body1"
+              sx={{
+                textAlign: 'center',
+                color: 'text.secondary',
+                mb: 6,
+                maxWidth: '600px',
+                mx: 'auto',
+                fontSize: '1.1rem',
+              }}
+            >
+              A summary of my academic journey and certifications
+            </Typography>
+
+            {/* Timeline Container */}
+            <Box sx={{ position: 'relative', maxWidth: '1000px', mx: 'auto' }}>
+              {/* Timeline Line */}
+              <Box
+                sx={{
+                  position: 'absolute',
+                  left: '50%',
+                  top: 0,
+                  bottom: 0,
+                  width: '2px',
+                  backgroundColor: 'primary.main',
+                  transform: 'translateX(-50%)',
+                  zIndex: 1,
+                }}
+              />
+
+              {education.map((edu, index) => (
+                <motion.div
+                  key={edu.degree}
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.2 }}
+                  viewport={{ once: true }}
+                >
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      mb: 6,
+                      position: 'relative',
+                    }}
+                  >
+                    {/* Timeline Dot */}
+                    <Box
+                      sx={{
+                        position: 'absolute',
+                        left: '50%',
+                        transform: 'translateX(-50%)',
+                        width: 20,
+                        height: 20,
+                        borderRadius: '50%',
+                        backgroundColor: edu.color,
+                        border: '4px solid white',
+                        boxShadow: '0 0 0 4px rgba(107, 115, 255, 0.2)',
+                        zIndex: 2,
+                      }}
+                    />
+
+                    {/* Content Card */}
+                    <Box
+                      sx={{
+                        width: '45%',
+                        ...(index % 2 === 0 ? { marginLeft: 'auto' } : { marginRight: 'auto' }),
+                      }}
+                    >
+                      <Card
+                        className="soothing-card hover-lift"
+                        sx={{
+                          borderRadius: 3,
+                          cursor: 'pointer',
+                          ...(index % 2 === 0 ? { ml: 2 } : { mr: 2 }),
+                        }}
+                        onClick={() => handleOpenEducationModal(edu)}
+                      >
+                        <CardContent sx={{ p: 4 }}>
+                          <Box
+                            sx={{
+                              display: 'flex',
+                              alignItems: 'center',
+                              mb: 2,
+                              gap: 2,
+                            }}
+                          >
+                            <Box
+                              sx={{
+                                width: 50,
+                                height: 50,
+                                borderRadius: '50%',
+                                backgroundColor: edu.color,
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                color: 'white',
+                              }}
+                            >
+                              <School />
+                            </Box>
+                            <Box sx={{ flex: 1 }}>
+                              <Typography
+                                variant="h5"
+                                sx={{
+                                  fontWeight: 400,
+                                  color: 'text.primary',
+                                  mb: 0.5,
+                                }}
+                              >
+                                {edu.degree}
+                              </Typography>
+                              <Typography
+                                variant="h6"
+                                sx={{
+                                  color: 'primary.main',
+                                  fontWeight: 500,
+                                  mb: 0.5,
+                                }}
+                              >
+                                {edu.institution}
+                              </Typography>
+                              <Typography
+                                variant="body2"
+                                sx={{
+                                  color: 'text.secondary',
+                                }}
+                              >
+                                {edu.period}
+                              </Typography>
+                            </Box>
+                          </Box>
+
+                          <Typography
+                            variant="body1"
+                            sx={{
+                              color: 'text.secondary',
+                              lineHeight: 1.7,
+                            }}
+                          >
+                            {edu.description}
+                          </Typography>
+                        </CardContent>
+                      </Card>
+                    </Box>
+                  </Box>
+                </motion.div>
+              ))}
+            </Box>
+          </Box>
+        </TabPanel>
+
+        {/* Skills Tab */}
+        <TabPanel value={activeTab} index={3}>
+          <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <Typography
+              variant="h3"
+              sx={{
+                mb: 4,
+                fontWeight: 300,
+                color: 'text.primary',
+                textAlign: 'center',
+              }}
+            >
+              Technical <span className="gradient-text">Skills</span>
+            </Typography>
+            <Typography
+              variant="body1"
+              sx={{
+                textAlign: 'center',
+                color: 'text.secondary',
+                mb: 6,
+                maxWidth: '600px',
+                mx: 'auto',
+                fontSize: '1.1rem',
+              }}
+            >
+              My proficiency in various programming languages, tools, and platforms
+            </Typography>
+            <Grid container spacing={4} justifyContent="center">
+              <Grid item xs={12} md={6}>
+                <Card className="soothing-card" sx={{ p: 4 }}>
+                  <CardContent>
+                    <Typography variant="h5" sx={{ mb: 3, fontWeight: 500, color: 'primary.main', textAlign: 'center' }}>
+                      Programming Languages
+                    </Typography>
+                    <Stack spacing={3}>
+                      {programmingSkills.map((skill, index) => (
+                        <motion.div
+                          key={skill.name}
+                          initial={{ opacity: 0, x: -30 }}
+                          whileInView={{ opacity: 1, x: 0 }}
+                          transition={{ duration: 0.4, delay: index * 0.1 }}
+                          viewport={{ once: true }}
+                        >
+                          <Box sx={{ mb: 1 }}>
+                            <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
+                              <Typography variant="body1" sx={{ color: 'text.primary', fontWeight: 500 }}>
+                                {skill.name}
+                              </Typography>
+                              <Typography variant="body2" sx={{ color: 'text.secondary', fontWeight: 500 }}>
+                                {skill.level}%
+                              </Typography>
+                            </Box>
+                            <Box className="skill-bar">
+                              <motion.div
+                                className="skill-progress"
+                                initial={{ width: 0 }}
+                                whileInView={{ width: `${skill.level}%` }}
+                                transition={{ duration: 1, delay: index * 0.1 }}
+                                viewport={{ once: true }}
+                                style={{
+                                  background: `linear-gradient(90deg, ${skill.color} 0%, ${skill.color}80 100%)`,
+                                }}
+                              />
+                            </Box>
+                          </Box>
+                        </motion.div>
+                      ))}
+                    </Stack>
+                  </CardContent>
+                </Card>
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <Card className="soothing-card" sx={{ p: 4 }}>
+                  <CardContent>
+                    <Typography variant="h5" sx={{ mb: 3, fontWeight: 500, color: 'primary.main', textAlign: 'center' }}>
+                      Tools & Platforms
+                    </Typography>
+                    <Stack spacing={3}>
+                      {toolsSkills.map((skill, index) => (
+                        <motion.div
+                          key={skill.name}
+                          initial={{ opacity: 0, x: 30 }}
+                          whileInView={{ opacity: 1, x: 0 }}
+                          transition={{ duration: 0.4, delay: index * 0.1 }}
+                          viewport={{ once: true }}
+                        >
+                          <Box sx={{ mb: 1 }}>
+                            <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
+                              <Typography variant="body1" sx={{ color: 'text.primary', fontWeight: 500 }}>
+                                {skill.name}
+                              </Typography>
+                              <Typography variant="body2" sx={{ color: 'text.secondary', fontWeight: 500 }}>
+                                {skill.level}%
+                              </Typography>
+                            </Box>
+                            <Box className="skill-bar">
+                              <motion.div
+                                className="skill-progress"
+                                initial={{ width: 0 }}
+                                whileInView={{ width: `${skill.level}%` }}
+                                transition={{ duration: 1, delay: index * 0.1 }}
+                                viewport={{ once: true }}
+                                style={{
+                                  background: `linear-gradient(90deg, ${skill.color} 0%, ${skill.color}80 100%)`,
+                                }}
+                              />
+                            </Box>
+                          </Box>
+                        </motion.div>
+                      ))}
+                    </Stack>
+                  </CardContent>
+                </Card>
+              </Grid>
+            </Grid>
+          </Box>
+        </TabPanel>
       </Container>
+
+      {/* Experience Detail Modal */}
+      <Dialog
+        open={openExperienceModal}
+        onClose={handleCloseExperienceModal}
+        maxWidth="md"
+        fullWidth
+        PaperProps={{
+          sx: {
+            backgroundColor: 'background.paper',
+            backgroundImage: 'none',
+            backdropFilter: 'blur(10px)',
+            border: '1px solid rgba(107, 115, 255, 0.2)',
+            borderRadius: 3,
+            boxShadow: '0 8px 32px rgba(107, 115, 255, 0.1)',
+          },
+        }}
+      >
+        {selectedExperience && (
+          <>
+            <DialogTitle sx={{ color: 'text.primary', pb: 1 }}>
+              <Box display="flex" justifyContent="space-between" alignItems="center">
+                <Typography variant="h5" sx={{ fontWeight: 400 }}>
+                  {selectedExperience.title} at {selectedExperience.company}
+                </Typography>
+                <IconButton onClick={handleCloseExperienceModal} sx={{ color: 'text.secondary' }}>
+                  <Close />
+                </IconButton>
+              </Box>
+              <Typography variant="body2" color="text.secondary">
+                {selectedExperience.location} • {selectedExperience.period}
+              </Typography>
+            </DialogTitle>
+            <DialogContent dividers sx={{ borderColor: 'rgba(107, 115, 255, 0.1)' }}>
+              <Typography variant="body1" sx={{ color: 'text.secondary', mb: 2 }}>
+                {selectedExperience.description}
+              </Typography>
+              <Typography variant="h6" sx={{ color: 'primary.main', mt: 3, mb: 1 }}>
+                Key Achievements
+              </Typography>
+              <List dense>
+                {selectedExperience.achievements.map((achievement, idx) => (
+                  <ListItem key={idx} sx={{ px: 0 }}>
+                    <ListItemIcon sx={{ minWidth: '30px', color: selectedExperience.color }}>
+                      <CheckCircle fontSize="small" />
+                    </ListItemIcon>
+                    <ListItemText primary={
+                      <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+                        {achievement}
+                      </Typography>
+                    } />
+                  </ListItem>
+                ))}
+              </List>
+              <Typography variant="h6" sx={{ color: 'primary.main', mt: 3, mb: 1 }}>
+                Technologies
+              </Typography>
+              <Stack direction="row" flexWrap="wrap" gap={1}>
+                {selectedExperience.technologies.map((tech, idx) => (
+                  <Chip
+                    key={idx}
+                    label={tech}
+                    size="small"
+                    sx={{
+                      backgroundColor: 'rgba(107, 115, 255, 0.1)',
+                      color: 'text.secondary',
+                    }}
+                  />
+                ))}
+              </Stack>
+            </DialogContent>
+          </>
+        )}
+      </Dialog>
+
+      {/* Education Detail Modal */}
+      <Dialog
+        open={openEducationModal}
+        onClose={handleCloseEducationModal}
+        maxWidth="md"
+        fullWidth
+        PaperProps={{
+          sx: {
+            backgroundColor: 'background.paper',
+            backgroundImage: 'none',
+            backdropFilter: 'blur(10px)',
+            border: '1px solid rgba(107, 115, 255, 0.2)',
+            borderRadius: 3,
+            boxShadow: '0 8px 32px rgba(107, 115, 255, 0.1)',
+          },
+        }}
+      >
+        {selectedEducation && (
+          <>
+            <DialogTitle sx={{ color: 'text.primary', pb: 1 }}>
+              <Box display="flex" justifyContent="space-between" alignItems="center">
+                <Typography variant="h5" sx={{ fontWeight: 400 }}>
+                  {selectedEducation.degree}
+                </Typography>
+                <IconButton onClick={handleCloseEducationModal} sx={{ color: 'text.secondary' }}>
+                  <Close />
+                </IconButton>
+              </Box>
+              <Typography variant="body2" color="text.secondary">
+                {selectedEducation.institution} • {selectedEducation.period}
+              </Typography>
+            </DialogTitle>
+            <DialogContent dividers sx={{ borderColor: 'rgba(107, 115, 255, 0.1)' }}>
+              <Typography variant="body1" sx={{ color: 'text.secondary', mb: 2 }}>
+                {selectedEducation.description}
+              </Typography>
+              {selectedEducation.gpa && (
+                <Typography variant="body2" sx={{ color: 'text.secondary', mb: 2 }}>
+                  <Star sx={{ fontSize: 'small', verticalAlign: 'middle', mr: 0.5, color: 'warning.main' }} />
+                  GPA: {selectedEducation.gpa}
+                </Typography>
+              )}
+              {selectedEducation.relevantCoursework && selectedEducation.relevantCoursework.length > 0 && (
+                <>
+                  <Typography variant="h6" sx={{ color: 'primary.main', mt: 3, mb: 1 }}>
+                    Relevant Coursework
+                  </Typography>
+                  <List dense>
+                    {selectedEducation.relevantCoursework.map((course, idx) => (
+                      <ListItem key={idx} sx={{ px: 0 }}>
+                        <ListItemIcon sx={{ minWidth: '30px', color: selectedEducation.color }}>
+                          <CheckCircle fontSize="small" />
+                        </ListItemIcon>
+                        <ListItemText primary={
+                          <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+                            {course}
+                          </Typography>
+                        } />
+                      </ListItem>
+                    ))}
+                  </List>
+                </>
+              )}
+            </DialogContent>
+          </>
+        )}
+      </Dialog>
     </Box>
   );
 };

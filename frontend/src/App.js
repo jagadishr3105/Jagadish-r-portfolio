@@ -7,64 +7,127 @@ import Hero from './components/Hero';
 import About from './components/About';
 import Projects from './components/Projects';
 import Skills from './components/Skills';
-import Experience from './components/Experience';
 import Contact from './components/Contact';
-import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
 import './App.css';
 
-const darkTheme = createTheme({
+const soothingTheme = createTheme({
   palette: {
-    mode: 'dark',
+    mode: 'light',
     primary: {
-      main: '#64ffda',
+      main: '#6B73FF', // Soft blue
+      light: '#9BB5FF',
+      dark: '#4A52CC',
     },
     secondary: {
-      main: '#f50057',
+      main: '#81C784', // Soft green
+      light: '#A5D6A7',
+      dark: '#66BB6A',
     },
     background: {
-      default: '#0a192f',
-      paper: '#112240',
+      default: '#FAFBFC', // Off-white
+      paper: '#FFFFFF',
     },
     text: {
-      primary: '#ccd6f6',
-      secondary: '#8892b0',
+      primary: '#2C3E50', // Soft dark blue
+      secondary: '#7F8C8D', // Soft gray
+    },
+    accent: {
+      lavender: '#E8EAF6',
+      sandy: '#F5F5DC',
+      pastel: '#F8F9FA',
     },
   },
   typography: {
-    fontFamily: '"Poppins", "Inter", "Roboto", "Helvetica", "Arial", sans-serif',
+    fontFamily: '"Lato", "Poppins", "Inter", "Roboto", "Helvetica", "Arial", sans-serif',
     h1: {
-      fontWeight: 700,
+      fontWeight: 300,
       fontSize: '3.5rem',
+      letterSpacing: '-0.02em',
     },
     h2: {
-      fontWeight: 600,
+      fontWeight: 300,
       fontSize: '2.5rem',
+      letterSpacing: '-0.01em',
     },
     h3: {
-      fontWeight: 600,
+      fontWeight: 400,
       fontSize: '2rem',
+      letterSpacing: '-0.01em',
     },
     h4: {
-      fontWeight: 500,
+      fontWeight: 400,
       fontSize: '1.5rem',
     },
+    body1: {
+      fontWeight: 400,
+      lineHeight: 1.7,
+    },
+    body2: {
+      fontWeight: 400,
+      lineHeight: 1.6,
+    },
   },
+  shape: {
+    borderRadius: 16,
+  },
+  shadows: [
+    'none',
+    '0px 2px 8px rgba(107, 115, 255, 0.1)',
+    '0px 4px 16px rgba(107, 115, 255, 0.12)',
+    '0px 8px 24px rgba(107, 115, 255, 0.15)',
+    '0px 12px 32px rgba(107, 115, 255, 0.18)',
+    '0px 16px 40px rgba(107, 115, 255, 0.2)',
+    '0px 20px 48px rgba(107, 115, 255, 0.22)',
+    '0px 24px 56px rgba(107, 115, 255, 0.24)',
+    '0px 28px 64px rgba(107, 115, 255, 0.26)',
+    '0px 32px 72px rgba(107, 115, 255, 0.28)',
+    '0px 36px 80px rgba(107, 115, 255, 0.3)',
+    '0px 40px 88px rgba(107, 115, 255, 0.32)',
+    '0px 44px 96px rgba(107, 115, 255, 0.34)',
+    '0px 48px 104px rgba(107, 115, 255, 0.36)',
+    '0px 52px 112px rgba(107, 115, 255, 0.38)',
+    '0px 56px 120px rgba(107, 115, 255, 0.4)',
+    '0px 60px 128px rgba(107, 115, 255, 0.42)',
+    '0px 64px 136px rgba(107, 115, 255, 0.44)',
+    '0px 68px 144px rgba(107, 115, 255, 0.46)',
+    '0px 72px 152px rgba(107, 115, 255, 0.48)',
+    '0px 76px 160px rgba(107, 115, 255, 0.5)',
+    '0px 80px 168px rgba(107, 115, 255, 0.52)',
+    '0px 84px 176px rgba(107, 115, 255, 0.54)',
+    '0px 88px 184px rgba(107, 115, 255, 0.56)',
+    '0px 92px 192px rgba(107, 115, 255, 0.58)',
+  ],
 });
 
 function App() {
   return (
-    <ThemeProvider theme={darkTheme}>
+    <ThemeProvider theme={soothingTheme}>
       <CssBaseline />
-      <Box sx={{ minHeight: '100vh', backgroundColor: 'background.default' }}>
+      <Box sx={{ minHeight: '100vh', backgroundColor: 'background.default', position: 'relative' }}>
+        {/* Soothing Background Elements */}
+        <div className="floating-shapes">
+          {[...Array(8)].map((_, i) => (
+            <div
+              key={i}
+              className="floating-shape"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                animationDelay: `${Math.random() * 10}s`,
+                animationDuration: `${15 + Math.random() * 10}s`,
+                backgroundColor: ['#E8EAF6', '#F3E5F5', '#E0F2F1', '#FFF3E0'][Math.floor(Math.random() * 4)],
+              }}
+            />
+          ))}
+        </div>
+
         <Navbar />
         <Hero />
         <About />
         <Projects />
         <Skills />
-        <Experience />
         <Contact />
-        <Footer />
         <ScrollToTop />
       </Box>
     </ThemeProvider>

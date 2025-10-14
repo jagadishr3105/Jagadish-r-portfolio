@@ -3,7 +3,6 @@ import {
   Box,
   Container,
   Typography,
-  Grid,
   Card,
   CardContent,
   CardMedia,
@@ -15,10 +14,10 @@ import {
 import {
   GitHub,
   Launch,
-  TrendingUp,
   Dashboard,
   Analytics,
-  Assessment,
+  Storage,
+  Code,
 } from '@mui/icons-material';
 import { motion } from 'framer-motion';
 
@@ -27,68 +26,68 @@ const Projects = () => {
     {
       id: 1,
       title: 'Financial Dashboard Analytics',
-      description: 'Interactive Tableau dashboard analyzing financial performance metrics, KPIs, and trends for a Fortune 500 company. Includes real-time data visualization and predictive modeling.',
-      image: '/api/placeholder/400/250',
+      description: 'Interactive Tableau dashboard analyzing financial performance metrics, KPIs, and trends. Features real-time data visualization and predictive modeling.',
+      image: 'https://via.placeholder.com/400x250/E0F2F1/2C3E50?text=Financial+Dashboard',
       technologies: ['Tableau', 'Python', 'SQL', 'PostgreSQL', 'AWS'],
-      githubUrl: 'https://github.com/your-username/financial-dashboard',
-      liveUrl: 'https://your-dashboard-demo.com',
+      githubUrl: 'https://github.com/jagadish-r/financial-dashboard',
+      liveUrl: 'https://demo.jagadish-r.com/financial-dashboard',
       category: 'Dashboard',
       icon: <Dashboard />,
     },
     {
       id: 2,
       title: 'Customer Segmentation Analysis',
-      description: 'Machine learning project using K-means clustering to segment customers based on purchasing behavior. Implemented RFM analysis and created actionable marketing strategies.',
-      image: '/api/placeholder/400/250',
-      technologies: ['Python', 'Scikit-learn', 'Pandas', 'Matplotlib', 'Jupyter'],
-      githubUrl: 'https://github.com/your-username/customer-segmentation',
-      liveUrl: 'https://your-segmentation-demo.com',
+      description: 'Machine learning project using K-means clustering to segment customers for targeted marketing strategies. Implemented in Python with scikit-learn.',
+      image: 'https://via.placeholder.com/400x250/E8EAF6/2C3E50?text=Customer+Segmentation',
+      technologies: ['Python', 'Scikit-learn', 'Pandas', 'Matplotlib'],
+      githubUrl: 'https://github.com/jagadish-r/customer-segmentation',
+      liveUrl: 'https://demo.jagadish-r.com/customer-segmentation',
       category: 'Machine Learning',
       icon: <Analytics />,
     },
     {
       id: 3,
       title: 'Sales Forecasting Model',
-      description: 'Time series analysis and forecasting model predicting sales trends using ARIMA and Prophet models. Achieved 92% accuracy in quarterly predictions.',
-      image: '/api/placeholder/400/250',
-      technologies: ['R', 'Prophet', 'ARIMA', 'ggplot2', 'Shiny'],
-      githubUrl: 'https://github.com/your-username/sales-forecasting',
-      liveUrl: 'https://your-forecasting-demo.com',
+      description: 'Time series forecasting model built with ARIMA and Prophet to predict future sales, optimizing inventory and resource allocation.',
+      image: 'https://via.placeholder.com/400x250/FFF3E0/2C3E50?text=Sales+Forecasting',
+      technologies: ['R', 'Prophet', 'Shiny', 'SQL'],
+      githubUrl: 'https://github.com/jagadish-r/sales-forecasting',
+      liveUrl: 'https://demo.jagadish-r.com/sales-forecasting',
       category: 'Forecasting',
-      icon: <TrendingUp />,
+      icon: <Analytics />,
     },
     {
       id: 4,
       title: 'E-commerce Data Pipeline',
-      description: 'End-to-end ETL pipeline processing e-commerce data from multiple sources. Automated data cleaning, transformation, and loading into data warehouse.',
-      image: '/api/placeholder/400/250',
-      technologies: ['Python', 'Apache Airflow', 'PostgreSQL', 'Docker', 'AWS S3'],
-      githubUrl: 'https://github.com/your-username/ecommerce-pipeline',
-      liveUrl: 'https://your-pipeline-demo.com',
+      description: 'End-to-end data pipeline for e-commerce analytics using Apache Airflow, processing millions of transactions daily with real-time monitoring.',
+      image: 'https://via.placeholder.com/400x250/F3E5F5/2C3E50?text=E-commerce+Pipeline',
+      technologies: ['Apache Airflow', 'Python', 'PostgreSQL', 'Redis', 'Docker'],
+      githubUrl: 'https://github.com/jagadish-r/ecommerce-pipeline',
+      liveUrl: 'https://demo.jagadish-r.com/ecommerce-pipeline',
       category: 'Data Engineering',
-      icon: <Assessment />,
+      icon: <Storage />,
     },
     {
       id: 5,
       title: 'Healthcare Analytics Dashboard',
-      description: 'Power BI dashboard analyzing patient outcomes, treatment effectiveness, and hospital performance metrics. Includes predictive models for patient readmission.',
-      image: '/api/placeholder/400/250',
-      technologies: ['Power BI', 'SQL Server', 'Python', 'DAX', 'Azure'],
-      githubUrl: 'https://github.com/your-username/healthcare-analytics',
-      liveUrl: 'https://your-healthcare-demo.com',
+      description: 'Comprehensive healthcare analytics platform tracking patient outcomes, resource utilization, and operational efficiency metrics.',
+      image: 'https://via.placeholder.com/400x250/E8F5E8/2C3E50?text=Healthcare+Analytics',
+      technologies: ['Power BI', 'SQL Server', 'Python', 'Azure', 'R'],
+      githubUrl: 'https://github.com/jagadish-r/healthcare-analytics',
+      liveUrl: 'https://demo.jagadish-r.com/healthcare-analytics',
       category: 'Healthcare',
-      icon: <Dashboard />,
+      icon: <Analytics />,
     },
     {
       id: 6,
       title: 'Social Media Sentiment Analysis',
-      description: 'NLP project analyzing social media sentiment for brand monitoring. Real-time sentiment tracking with automated alerts and trend analysis.',
-      image: '/api/placeholder/400/250',
-      technologies: ['Python', 'NLTK', 'TextBlob', 'Twitter API', 'Streamlit'],
-      githubUrl: 'https://github.com/your-username/sentiment-analysis',
-      liveUrl: 'https://your-sentiment-demo.com',
+      description: 'Real-time sentiment analysis tool for social media monitoring using NLP and machine learning. Processes over 10,000 posts per hour.',
+      image: 'https://via.placeholder.com/400x250/FFF8E1/2C3E50?text=Sentiment+Analysis',
+      technologies: ['Python', 'NLTK', 'VADER', 'Flask', 'MongoDB'],
+      githubUrl: 'https://github.com/jagadish-r/sentiment-analysis',
+      liveUrl: 'https://demo.jagadish-r.com/sentiment-analysis',
       category: 'NLP',
-      icon: <Analytics />,
+      icon: <Code />,
     },
   ];
 
@@ -97,7 +96,7 @@ const Projects = () => {
       id="projects"
       className="section-padding"
       sx={{
-        backgroundColor: 'background.paper',
+        backgroundColor: 'transparent',
         py: { xs: 8, md: 12 },
       }}
     >
@@ -113,7 +112,7 @@ const Projects = () => {
             sx={{
               textAlign: 'center',
               mb: 2,
-              fontWeight: 700,
+              fontWeight: 300,
               color: 'text.primary',
             }}
           >
@@ -127,250 +126,205 @@ const Projects = () => {
               mb: 8,
               maxWidth: '600px',
               mx: 'auto',
+              fontSize: '1.1rem',
+              lineHeight: 1.7,
             }}
           >
-            Explore my portfolio of data analysis projects, from interactive dashboards 
-            to machine learning models and data pipelines
+            A collection of data analysis projects showcasing my expertise in various domains
+            and technologies
           </Typography>
         </motion.div>
 
-        <Grid container spacing={4}>
+        <Box
+          sx={{
+            display: 'grid',
+            gridTemplateColumns: {
+              xs: '1fr',
+              sm: 'repeat(2, 1fr)',
+              lg: 'repeat(3, 1fr)',
+            },
+            gap: 4,
+            justifyContent: 'center',
+          }}
+        >
           {projects.map((project, index) => (
-            <Grid item xs={12} md={6} lg={4} key={project.id}>
-              <motion.div
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                whileHover={{ y: -10 }}
+            <motion.div
+              key={project.id}
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              viewport={{ once: true }}
+              whileHover={{ y: -8 }}
+            >
+              <Card
+                className="soothing-card hover-lift"
+                sx={{
+                  height: '100%',
+                  display: 'flex',
+                  flexDirection: 'column',
+                }}
               >
-                <Card
-                  className="hover-lift"
+                <CardMedia
+                  component="img"
+                  height="200"
+                  image={project.image}
+                  alt={project.title}
                   sx={{
-                    height: '100%',
-                    backgroundColor: 'background.default',
-                    border: '1px solid rgba(100, 255, 218, 0.2)',
-                    borderRadius: 3,
-                    overflow: 'hidden',
-                    '&:hover': {
-                      borderColor: 'primary.main',
-                      boxShadow: '0 20px 40px rgba(100, 255, 218, 0.2)',
-                    },
-                    transition: 'all 0.3s ease',
+                    objectFit: 'cover',
                   }}
-                >
-                  <Box sx={{ position: 'relative' }}>
-                    <CardMedia
-                      component="img"
-                      height="200"
-                      image={project.image}
-                      alt={project.title}
-                      sx={{
-                        transition: 'transform 0.3s ease',
-                        '&:hover': {
-                          transform: 'scale(1.05)',
-                        },
-                      }}
-                    />
+                />
+                <CardContent sx={{ p: 3, flex: 1, display: 'flex', flexDirection: 'column' }}>
+                  {/* Project Header */}
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      mb: 2,
+                      gap: 2,
+                    }}
+                  >
                     <Box
                       sx={{
-                        position: 'absolute',
-                        top: 16,
-                        left: 16,
-                        backgroundColor: 'rgba(100, 255, 218, 0.9)',
-                        color: 'background.default',
+                        width: 50,
+                        height: 50,
                         borderRadius: '50%',
-                        p: 1,
+                        backgroundColor: 'primary.main',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
+                        color: 'white',
                       }}
                     >
                       {project.icon}
                     </Box>
-                    <Box
-                      sx={{
-                        position: 'absolute',
-                        top: 16,
-                        right: 16,
-                        display: 'flex',
-                        gap: 1,
-                      }}
-                    >
-                      <IconButton
-                        component="a"
-                        href={project.githubUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
+                    <Box sx={{ flex: 1 }}>
+                      <Typography
+                        variant="h6"
                         sx={{
-                          backgroundColor: 'rgba(0, 0, 0, 0.7)',
-                          color: 'white',
-                          '&:hover': {
-                            backgroundColor: 'rgba(100, 255, 218, 0.9)',
-                            color: 'background.default',
-                          },
+                          fontWeight: 500,
+                          color: 'text.primary',
+                          mb: 0.5,
                         }}
                       >
-                        <GitHub fontSize="small" />
-                      </IconButton>
-                      <IconButton
-                        component="a"
-                        href={project.liveUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        sx={{
-                          backgroundColor: 'rgba(0, 0, 0, 0.7)',
-                          color: 'white',
-                          '&:hover': {
-                            backgroundColor: 'rgba(100, 255, 218, 0.9)',
-                            color: 'background.default',
-                          },
-                        }}
-                      >
-                        <Launch fontSize="small" />
-                      </IconButton>
-                    </Box>
-                  </Box>
-
-                  <CardContent sx={{ p: 3, flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
-                    <Box sx={{ mb: 2 }}>
+                        {project.title}
+                      </Typography>
                       <Chip
                         label={project.category}
                         size="small"
                         sx={{
-                          backgroundColor: 'rgba(100, 255, 218, 0.1)',
+                          backgroundColor: 'rgba(107, 115, 255, 0.1)',
                           color: 'primary.main',
-                          border: '1px solid rgba(100, 255, 218, 0.3)',
-                          mb: 2,
+                          border: '1px solid rgba(107, 115, 255, 0.2)',
+                          fontWeight: 500,
                         }}
                       />
                     </Box>
+                  </Box>
 
-                    <Typography
-                      variant="h5"
-                      sx={{
-                        mb: 2,
-                        fontWeight: 600,
-                        color: 'text.primary',
-                        lineHeight: 1.3,
-                      }}
-                    >
-                      {project.title}
-                    </Typography>
+                  {/* Project Description */}
+                  <Typography
+                    variant="body2"
+                    sx={{
+                      color: 'text.secondary',
+                      mb: 3,
+                      lineHeight: 1.6,
+                      flex: 1,
+                    }}
+                  >
+                    {project.description}
+                  </Typography>
 
+                  {/* Technologies */}
+                  <Box sx={{ mb: 3 }}>
                     <Typography
                       variant="body2"
                       sx={{
-                        color: 'text.secondary',
-                        mb: 3,
-                        lineHeight: 1.6,
-                        flexGrow: 1,
+                        color: 'text.primary',
+                        fontWeight: 500,
+                        mb: 1,
                       }}
                     >
-                      {project.description}
+                      Technologies
                     </Typography>
-
-                    <Stack direction="row" flexWrap="wrap" gap={1} sx={{ mb: 3 }}>
-                      {project.technologies.map((tech) => (
-                        <Chip
-                          key={tech}
-                          label={tech}
-                          size="small"
-                          sx={{
-                            backgroundColor: 'rgba(136, 146, 176, 0.1)',
-                            color: 'text.secondary',
-                            fontSize: '0.75rem',
-                            '&:hover': {
-                              backgroundColor: 'rgba(100, 255, 218, 0.1)',
-                              color: 'primary.main',
-                            },
-                            transition: 'all 0.3s ease',
-                          }}
-                        />
+                    <Stack direction="row" flexWrap="wrap" gap={0.5}>
+                      {project.technologies.map((tech, idx) => (
+                        <motion.div
+                          key={`${project.id}-${tech}-${idx}`}
+                          initial={{ opacity: 0, scale: 0.8 }}
+                          whileInView={{ opacity: 1, scale: 1 }}
+                          transition={{ duration: 0.2, delay: idx * 0.05 }}
+                          viewport={{ once: true }}
+                        >
+                          <Chip
+                            label={tech}
+                            size="small"
+                            sx={{
+                              backgroundColor: 'rgba(107, 115, 255, 0.1)',
+                              color: 'text.secondary',
+                              fontSize: '0.75rem',
+                              height: 24,
+                              '&:hover': {
+                                backgroundColor: 'rgba(107, 115, 255, 0.15)',
+                                color: 'primary.main',
+                              },
+                              transition: 'all 0.3s ease',
+                            }}
+                          />
+                        </motion.div>
                       ))}
                     </Stack>
+                  </Box>
 
-                    <Stack direction="row" spacing={2}>
-                      <Button
-                        component="a"
-                        href={project.githubUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        variant="outlined"
-                        size="small"
-                        startIcon={<GitHub />}
-                        sx={{
-                          borderColor: 'rgba(100, 255, 218, 0.5)',
-                          color: 'primary.main',
-                          textTransform: 'none',
-                          '&:hover': {
-                            borderColor: 'primary.main',
-                            backgroundColor: 'rgba(100, 255, 218, 0.1)',
-                          },
-                        }}
-                      >
-                        Code
-                      </Button>
-                      <Button
-                        component="a"
-                        href={project.liveUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        variant="contained"
-                        size="small"
-                        startIcon={<Launch />}
-                        sx={{
-                          backgroundColor: 'primary.main',
-                          color: 'background.default',
-                          textTransform: 'none',
-                          '&:hover': {
-                            backgroundColor: 'rgba(100, 255, 218, 0.8)',
-                          },
-                        }}
-                      >
-                        Live Demo
-                      </Button>
-                    </Stack>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            </Grid>
+                  {/* Action Buttons */}
+                  <Stack direction="row" spacing={1} sx={{ mt: 'auto' }}>
+                    <Button
+                      component="a"
+                      href={project.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      startIcon={<GitHub />}
+                      size="small"
+                      sx={{
+                        flex: 1,
+                        backgroundColor: 'rgba(107, 115, 255, 0.1)',
+                        color: 'primary.main',
+                        border: '1px solid rgba(107, 115, 255, 0.2)',
+                        borderRadius: '20px',
+                        textTransform: 'none',
+                        fontWeight: 500,
+                        '&:hover': {
+                          backgroundColor: 'rgba(107, 115, 255, 0.15)',
+                          transform: 'translateY(-1px)',
+                        },
+                        transition: 'all 0.3s ease',
+                      }}
+                    >
+                      Code
+                    </Button>
+                    <Button
+                      component="a"
+                      href={project.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      startIcon={<Launch />}
+                      size="small"
+                      className="soft-button"
+                      sx={{
+                        flex: 1,
+                        borderRadius: '20px',
+                        textTransform: 'none',
+                        fontWeight: 500,
+                        fontSize: '0.875rem',
+                      }}
+                    >
+                      Demo
+                    </Button>
+                  </Stack>
+                </CardContent>
+              </Card>
+            </motion.div>
           ))}
-        </Grid>
-
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-        >
-          <Box sx={{ textAlign: 'center', mt: 6 }}>
-            <Button
-              component="a"
-              href="https://github.com/your-username"
-              target="_blank"
-              rel="noopener noreferrer"
-              variant="outlined"
-              size="large"
-              sx={{
-                borderColor: 'primary.main',
-                color: 'primary.main',
-                px: 4,
-                py: 1.5,
-                fontSize: '1rem',
-                fontWeight: 600,
-                textTransform: 'none',
-                borderRadius: 2,
-                '&:hover': {
-                  backgroundColor: 'rgba(100, 255, 218, 0.1)',
-                  borderColor: 'primary.main',
-                },
-              }}
-            >
-              View All Projects on GitHub
-            </Button>
-          </Box>
-        </motion.div>
+        </Box>
       </Container>
     </Box>
   );

@@ -1,117 +1,56 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   Box,
   Container,
   Typography,
   Grid,
-  Card,
-  TextField,
   Button,
-  IconButton,
   Stack,
-  Alert,
-  Snackbar,
-  CircularProgress,
 } from '@mui/material';
 import {
   Email,
   LinkedIn,
   GitHub,
-  Phone,
-  LocationOn,
-  Send,
+  Download,
 } from '@mui/icons-material';
 import { motion } from 'framer-motion';
-import axios from 'axios';
 
 const Contact = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: '',
-  });
-  const [loading, setLoading] = useState(false);
-  const [alert, setAlert] = useState({
-    open: false,
-    message: '',
-    severity: 'success',
-  });
-
-  const contactInfo = [
+  const contactButtons = [
     {
       icon: <Email />,
       title: 'Email',
-      value: 'your.email@example.com',
-      href: 'mailto:your.email@example.com',
-      color: '#64ffda',
-    },
-    {
-      icon: <Phone />,
-      title: 'Phone',
-      value: '+1 (555) 123-4567',
-      href: 'tel:+15551234567',
-      color: '#f50057',
-    },
-    {
-      icon: <LocationOn />,
-      title: 'Location',
-      value: 'San Francisco, CA',
-      href: 'https://maps.google.com/?q=San Francisco, CA',
-      color: '#ff9800',
+      value: 'jagadishr3105@gmail.com',
+      href: 'mailto:jagadishr3105@gmail.com',
+      gradient: 'linear-gradient(135deg, #6B73FF 0%, #9BB5FF 100%)',
+      color: '#6B73FF',
     },
     {
       icon: <LinkedIn />,
       title: 'LinkedIn',
-      value: 'linkedin.com/in/yourprofile',
-      href: 'https://linkedin.com/in/yourprofile',
-      color: '#0077b5',
+      value: 'linkedin.com/in/jagadish-r',
+      href: 'https://linkedin.com/in/jagadish-r',
+      gradient: 'linear-gradient(135deg, #81C784 0%, #A5D6A7 100%)',
+      color: '#81C784',
+    },
+    {
+      icon: <GitHub />,
+      title: 'GitHub',
+      value: 'github.com/jagadishr3105',
+      href: 'https://github.com/jagadishr3105',
+      gradient: 'linear-gradient(135deg, #7F8C8D 0%, #95A5A6 100%)',
+      color: '#7F8C8D',
     },
   ];
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-
-    try {
-      // Replace with your backend URL
-      const response = await axios.post('http://localhost:5001/api/contact', formData);
-      
-      if (response.data.success) {
-        setAlert({
-          open: true,
-          message: 'Message sent successfully! I\'ll get back to you soon.',
-          severity: 'success',
-        });
-        setFormData({
-          name: '',
-          email: '',
-          subject: '',
-          message: '',
-        });
-      }
-    } catch (error) {
-      console.error('Contact form error:', error);
-      setAlert({
-        open: true,
-        message: 'Failed to send message. Please try again or contact me directly.',
-        severity: 'error',
-      });
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleCloseAlert = () => {
-    setAlert(prev => ({ ...prev, open: false }));
+  const handleDownloadResume = () => {
+    const resumeUrl = '/resume.pdf';
+    const link = document.createElement('a');
+    link.href = resumeUrl;
+    link.download = 'Jagadish_R_Resume.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   return (
@@ -119,10 +58,29 @@ const Contact = () => {
       id="contact"
       className="section-padding"
       sx={{
-        backgroundColor: 'background.default',
+        background: 'linear-gradient(135deg, rgba(107, 115, 255, 0.05) 0%, rgba(129, 199, 132, 0.05) 100%)',
         py: { xs: 8, md: 12 },
+        position: 'relative',
+        overflow: 'hidden',
       }}
     >
+      {/* Soothing Background Effects */}
+      <Box
+        sx={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          background: `
+            radial-gradient(circle at 20% 20%, rgba(107, 115, 255, 0.08) 0%, transparent 50%),
+            radial-gradient(circle at 80% 80%, rgba(129, 199, 132, 0.08) 0%, transparent 50%),
+            radial-gradient(circle at 40% 60%, rgba(232, 234, 246, 0.3) 0%, transparent 50%)
+          `,
+          zIndex: -1,
+        }}
+      />
+
       <Container maxWidth="lg">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -135,11 +93,11 @@ const Contact = () => {
             sx={{
               textAlign: 'center',
               mb: 2,
-              fontWeight: 700,
+              fontWeight: 300,
               color: 'text.primary',
             }}
           >
-            Get In <span className="gradient-text">Touch</span>
+            Let's <span className="gradient-text">Connect</span>
           </Typography>
           <Typography
             variant="body1"
@@ -149,370 +107,122 @@ const Contact = () => {
               mb: 8,
               maxWidth: '600px',
               mx: 'auto',
+              fontSize: '1.1rem',
+              lineHeight: 1.7,
             }}
           >
-            I'm always interested in new opportunities and collaborations. 
-            Whether you have a project in mind or just want to chat about data, 
-            feel free to reach out!
+            I'm always open to collaborations, consulting, speaking, or just a friendly chat about 
+            data analysis, AI, or creative tech. Reach out via any channel below!
           </Typography>
         </motion.div>
 
-        <Grid container spacing={6}>
-          {/* Contact Information */}
-          <Grid item xs={12} md={5}>
+        <Grid container spacing={4} justifyContent="center">
+          <Grid item xs={12} md={8} lg={6}>
             <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              <Typography
-                variant="h4"
-                sx={{
-                  mb: 3,
-                  fontWeight: 600,
-                  color: 'text.primary',
-                }}
-              >
-                Let's Connect
-              </Typography>
-              
-              <Typography
-                variant="body1"
-                sx={{
-                  color: 'text.secondary',
-                  mb: 4,
-                  lineHeight: 1.7,
-                }}
-              >
-                I'm currently open to new opportunities in data analysis, 
-                business intelligence, and data science roles. I'm also available 
-                for consulting projects and freelance work.
-              </Typography>
-
               <Stack spacing={3}>
-                {contactInfo.map((info, index) => (
+                {contactButtons.map((contact, index) => (
                   <motion.div
-                    key={info.title}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    key={contact.title}
+                    initial={{ opacity: 0, x: -30 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.6, delay: index * 0.1 }}
                     viewport={{ once: true }}
+                    whileHover={{ scale: 1.02 }}
                   >
-                    <Card
+                    <Button
                       component="a"
-                      href={info.href}
-                      target={info.href.startsWith('http') ? '_blank' : '_self'}
-                      rel={info.href.startsWith('http') ? 'noopener noreferrer' : ''}
+                      href={contact.href}
+                      target={contact.href.startsWith('http') ? '_blank' : '_self'}
+                      rel={contact.href.startsWith('http') ? 'noopener noreferrer' : ''}
+                      fullWidth
+                      className="contact-card"
                       sx={{
-                        backgroundColor: 'background.paper',
-                        border: '1px solid rgba(100, 255, 218, 0.2)',
-                        borderRadius: 2,
-                        p: 2,
-                        textDecoration: 'none',
-                        display: 'block',
+                        background: contact.gradient,
+                        color: 'white',
+                        p: 3,
+                        borderRadius: 3,
+                        textTransform: 'none',
+                        fontSize: '1rem',
+                        fontWeight: 500,
+                        boxShadow: `0 8px 32px ${contact.color}30`,
+                        border: `1px solid ${contact.color}20`,
                         '&:hover': {
-                          borderColor: info.color,
-                          transform: 'translateY(-2px)',
-                          boxShadow: `0 5px 20px ${info.color}30`,
+                          background: contact.gradient,
+                          transform: 'translateY(-3px)',
+                          boxShadow: `0 12px 40px ${contact.color}40`,
+                          border: `1px solid ${contact.color}40`,
                         },
                         transition: 'all 0.3s ease',
                       }}
                     >
-                      <Box
-                        sx={{
-                          display: 'flex',
-                          alignItems: 'center',
-                          gap: 2,
-                        }}
-                      >
+                      <Box sx={{ display: 'flex', alignItems: 'center', width: '100%', gap: 2 }}>
                         <Box
                           sx={{
-                            color: info.color,
                             display: 'flex',
                             alignItems: 'center',
+                            justifyContent: 'center',
+                            width: 50,
+                            height: 50,
+                            borderRadius: '50%',
+                            backgroundColor: 'rgba(255, 255, 255, 0.2)',
+                            color: 'white',
                           }}
                         >
-                          {React.cloneElement(info.icon, { fontSize: 'large' })}
+                          {contact.icon}
                         </Box>
-                        <Box>
-                          <Typography
-                            variant="h6"
-                            sx={{
-                              color: 'text.primary',
-                              fontWeight: 600,
-                              mb: 0.5,
-                            }}
-                          >
-                            {info.title}
+                        <Box sx={{ flex: 1, textAlign: 'left' }}>
+                          <Typography variant="h6" sx={{ fontWeight: 500, mb: 0.5 }}>
+                            {contact.title}
                           </Typography>
-                          <Typography
-                            variant="body2"
-                            sx={{
-                              color: 'text.secondary',
-                            }}
-                          >
-                            {info.value}
+                          <Typography variant="body2" sx={{ opacity: 0.9 }}>
+                            {contact.value}
                           </Typography>
                         </Box>
                       </Box>
-                    </Card>
+                    </Button>
                   </motion.div>
                 ))}
+
+                {/* Download Resume Button */}
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.4 }}
+                  viewport={{ once: true }}
+                  whileHover={{ scale: 1.02 }}
+                >
+                  <Button
+                    onClick={handleDownloadResume}
+                    fullWidth
+                    startIcon={<Download />}
+                    className="soft-button"
+                    sx={{
+                      p: 3,
+                      fontSize: '1rem',
+                      fontWeight: 500,
+                      textTransform: 'none',
+                      borderRadius: 3,
+                      boxShadow: '0 8px 32px rgba(107, 115, 255, 0.3)',
+                      '&:hover': {
+                        transform: 'translateY(-3px)',
+                        boxShadow: '0 12px 40px rgba(107, 115, 255, 0.4)',
+                      },
+                      transition: 'all 0.3s ease',
+                    }}
+                  >
+                    Download Resume
+                  </Button>
+                </motion.div>
               </Stack>
-
-              {/* Social Links */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-                viewport={{ once: true }}
-              >
-                <Typography
-                  variant="h6"
-                  sx={{
-                    mt: 4,
-                    mb: 2,
-                    fontWeight: 600,
-                    color: 'text.primary',
-                  }}
-                >
-                  Follow Me
-                </Typography>
-                <Stack direction="row" spacing={2}>
-                  {[
-                    { icon: <LinkedIn />, href: 'https://linkedin.com/in/yourprofile', color: '#0077b5', label: 'LinkedIn' },
-                    { icon: <GitHub />, href: 'https://github.com/yourusername', color: '#333', label: 'GitHub' },
-                    { icon: <Email />, href: 'mailto:your.email@example.com', color: '#64ffda', label: 'Email' },
-                  ].map((social) => (
-                    <motion.div
-                      key={social.label}
-                      whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      <IconButton
-                        component="a"
-                        href={social.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        sx={{
-                          backgroundColor: 'background.paper',
-                          border: '1px solid rgba(100, 255, 218, 0.2)',
-                          color: 'text.secondary',
-                          '&:hover': {
-                            color: social.color,
-                            borderColor: social.color,
-                            backgroundColor: `${social.color}10`,
-                          },
-                          transition: 'all 0.3s ease',
-                        }}
-                      >
-                        {social.icon}
-                      </IconButton>
-                    </motion.div>
-                  ))}
-                </Stack>
-              </motion.div>
-            </motion.div>
-          </Grid>
-
-          {/* Contact Form */}
-          <Grid item xs={12} md={7}>
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-            >
-              <Card
-                sx={{
-                  backgroundColor: 'background.paper',
-                  border: '1px solid rgba(100, 255, 218, 0.2)',
-                  borderRadius: 3,
-                  p: 4,
-                }}
-              >
-                <Typography
-                  variant="h4"
-                  sx={{
-                    mb: 3,
-                    fontWeight: 600,
-                    color: 'text.primary',
-                  }}
-                >
-                  Send Message
-                </Typography>
-
-                <Box component="form" onSubmit={handleSubmit}>
-                  <Grid container spacing={3}>
-                    <Grid item xs={12} sm={6}>
-                      <TextField
-                        fullWidth
-                        label="Your Name"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleInputChange}
-                        required
-                        sx={{
-                          '& .MuiOutlinedInput-root': {
-                            '& fieldset': {
-                              borderColor: 'rgba(100, 255, 218, 0.3)',
-                            },
-                            '&:hover fieldset': {
-                              borderColor: 'rgba(100, 255, 218, 0.5)',
-                            },
-                            '&.Mui-focused fieldset': {
-                              borderColor: 'primary.main',
-                            },
-                          },
-                          '& .MuiInputLabel-root': {
-                            color: 'text.secondary',
-                          },
-                          '& .MuiInputLabel-root.Mui-focused': {
-                            color: 'primary.main',
-                          },
-                        }}
-                      />
-                    </Grid>
-                    <Grid item xs={12} sm={6}>
-                      <TextField
-                        fullWidth
-                        label="Email Address"
-                        name="email"
-                        type="email"
-                        value={formData.email}
-                        onChange={handleInputChange}
-                        required
-                        sx={{
-                          '& .MuiOutlinedInput-root': {
-                            '& fieldset': {
-                              borderColor: 'rgba(100, 255, 218, 0.3)',
-                            },
-                            '&:hover fieldset': {
-                              borderColor: 'rgba(100, 255, 218, 0.5)',
-                            },
-                            '&.Mui-focused fieldset': {
-                              borderColor: 'primary.main',
-                            },
-                          },
-                          '& .MuiInputLabel-root': {
-                            color: 'text.secondary',
-                          },
-                          '& .MuiInputLabel-root.Mui-focused': {
-                            color: 'primary.main',
-                          },
-                        }}
-                      />
-                    </Grid>
-                    <Grid item xs={12}>
-                      <TextField
-                        fullWidth
-                        label="Subject"
-                        name="subject"
-                        value={formData.subject}
-                        onChange={handleInputChange}
-                        required
-                        sx={{
-                          '& .MuiOutlinedInput-root': {
-                            '& fieldset': {
-                              borderColor: 'rgba(100, 255, 218, 0.3)',
-                            },
-                            '&:hover fieldset': {
-                              borderColor: 'rgba(100, 255, 218, 0.5)',
-                            },
-                            '&.Mui-focused fieldset': {
-                              borderColor: 'primary.main',
-                            },
-                          },
-                          '& .MuiInputLabel-root': {
-                            color: 'text.secondary',
-                          },
-                          '& .MuiInputLabel-root.Mui-focused': {
-                            color: 'primary.main',
-                          },
-                        }}
-                      />
-                    </Grid>
-                    <Grid item xs={12}>
-                      <TextField
-                        fullWidth
-                        label="Message"
-                        name="message"
-                        multiline
-                        rows={6}
-                        value={formData.message}
-                        onChange={handleInputChange}
-                        required
-                        sx={{
-                          '& .MuiOutlinedInput-root': {
-                            '& fieldset': {
-                              borderColor: 'rgba(100, 255, 218, 0.3)',
-                            },
-                            '&:hover fieldset': {
-                              borderColor: 'rgba(100, 255, 218, 0.5)',
-                            },
-                            '&.Mui-focused fieldset': {
-                              borderColor: 'primary.main',
-                            },
-                          },
-                          '& .MuiInputLabel-root': {
-                            color: 'text.secondary',
-                          },
-                          '& .MuiInputLabel-root.Mui-focused': {
-                            color: 'primary.main',
-                          },
-                        }}
-                      />
-                    </Grid>
-                    <Grid item xs={12}>
-                      <Button
-                        type="submit"
-                        variant="contained"
-                        size="large"
-                        disabled={loading}
-                        startIcon={loading ? <CircularProgress size={20} /> : <Send />}
-                        sx={{
-                          backgroundColor: 'primary.main',
-                          color: 'background.default',
-                          px: 4,
-                          py: 1.5,
-                          fontSize: '1rem',
-                          fontWeight: 600,
-                          textTransform: 'none',
-                          borderRadius: 2,
-                          '&:hover': {
-                            backgroundColor: 'rgba(100, 255, 218, 0.8)',
-                          },
-                          '&:disabled': {
-                            backgroundColor: 'rgba(100, 255, 218, 0.3)',
-                          },
-                        }}
-                      >
-                        {loading ? 'Sending...' : 'Send Message'}
-                      </Button>
-                    </Grid>
-                  </Grid>
-                </Box>
-              </Card>
             </motion.div>
           </Grid>
         </Grid>
       </Container>
-
-      <Snackbar
-        open={alert.open}
-        autoHideDuration={6000}
-        onClose={handleCloseAlert}
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-      >
-        <Alert
-          onClose={handleCloseAlert}
-          severity={alert.severity}
-          sx={{ width: '100%' }}
-        >
-          {alert.message}
-        </Alert>
-      </Snackbar>
     </Box>
   );
 };

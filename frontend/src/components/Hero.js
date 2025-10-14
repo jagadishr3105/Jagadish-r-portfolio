@@ -4,9 +4,9 @@ import {
   Container,
   Typography,
   Button,
-  Avatar,
   Stack,
   IconButton,
+  Chip,
 } from '@mui/material';
 import {
   LinkedIn,
@@ -27,173 +27,193 @@ const Hero = () => {
   const socialLinks = [
     {
       icon: <LinkedIn />,
-      href: 'https://linkedin.com/in/your-profile',
+      href: 'https://linkedin.com/in/jagadish-r',
       label: 'LinkedIn',
+      color: '#0077B5',
     },
     {
       icon: <GitHub />,
-      href: 'https://github.com/your-username',
+      href: 'https://github.com/jagadishr3105',
       label: 'GitHub',
+      color: '#333',
     },
     {
       icon: <Email />,
-      href: 'mailto:your.email@example.com',
+      href: 'mailto:jagadishr3105@gmail.com',
       label: 'Email',
+      color: '#6B73FF',
     },
   ];
 
   return (
     <Box
       id="home"
-      className="hero-bg"
       sx={{
         minHeight: '100vh',
         display: 'flex',
         alignItems: 'center',
-        backgroundColor: 'background.default',
+        backgroundColor: 'transparent',
         position: 'relative',
         overflow: 'hidden',
+        paddingTop: '80px',
       }}
     >
       <Container maxWidth="lg">
         <Box
           sx={{
             display: 'flex',
-            flexDirection: { xs: 'column', md: 'row' },
+            flexDirection: 'column',
             alignItems: 'center',
-            justifyContent: 'space-between',
+            justifyContent: 'center',
             gap: 4,
             py: 8,
+            textAlign: 'center',
           }}
         >
-          {/* Left Side - Text Content */}
-          <Box sx={{ flex: 1, textAlign: { xs: 'center', md: 'left' } }}>
+          {/* Available Badge */}
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <Chip
+              label="Available for Opportunities"
+              sx={{
+                background: 'linear-gradient(135deg, #6B73FF 0%, #81C784 100%)',
+                color: 'white',
+                fontWeight: 500,
+                fontSize: '0.9rem',
+                px: 3,
+                py: 1,
+                mb: 3,
+                boxShadow: '0 4px 20px rgba(107, 115, 255, 0.3)',
+                borderRadius: '20px',
+              }}
+            />
+          </motion.div>
+
+          {/* Main Content */}
+          <Box sx={{ maxWidth: '800px', mx: 'auto' }}>
             <motion.div
-              initial={{ opacity: 0, y: 50 }}
+              initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
             >
               <Typography
                 variant="h6"
                 sx={{
                   color: 'primary.main',
-                  fontWeight: 500,
+                  fontWeight: 400,
                   mb: 2,
-                  fontSize: { xs: '1rem', md: '1.2rem' },
+                  fontSize: { xs: '1rem', md: '1.1rem' },
+                  letterSpacing: '0.1em',
+                  textTransform: 'uppercase',
                 }}
               >
-                Hi, my name is
+                Hello, I'm
               </Typography>
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, y: 50 }}
+              initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
             >
               <Typography
                 variant="h1"
                 sx={{
-                  fontWeight: 700,
+                  fontWeight: 300,
                   mb: 2,
                   fontSize: { xs: '2.5rem', md: '4rem', lg: '5rem' },
                   lineHeight: 1.1,
+                  color: 'text.primary',
                 }}
               >
-                <span className="gradient-text">Your Name</span>
+                <span className="gradient-text">Jagadish R</span>
               </Typography>
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, y: 50 }}
+              initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
             >
               <Typography
                 variant="h2"
                 sx={{
                   color: 'text.secondary',
-                  fontWeight: 600,
+                  fontWeight: 300,
                   mb: 3,
-                  fontSize: { xs: '1.8rem', md: '3rem', lg: '4rem' },
-                  lineHeight: 1.1,
+                  fontSize: { xs: '1.5rem', md: '2.5rem', lg: '3rem' },
+                  lineHeight: 1.2,
                 }}
               >
-                Data Analyst & Insights Expert
+                Data Analyst & <span style={{ color: '#6B73FF' }}>Insights Expert</span>
               </Typography>
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, y: 50 }}
+              initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
+              transition={{ duration: 0.8, delay: 0.8 }}
             >
               <Typography
                 variant="body1"
                 sx={{
                   color: 'text.secondary',
                   mb: 4,
-                  maxWidth: '500px',
+                  maxWidth: '600px',
                   fontSize: { xs: '1rem', md: '1.1rem' },
-                  lineHeight: 1.6,
-                  mx: { xs: 'auto', md: 0 },
+                  lineHeight: 1.7,
+                  mx: 'auto',
+                  fontWeight: 400,
                 }}
               >
-                I'm a passionate data analyst who transforms complex datasets into
-                actionable insights. I specialize in building interactive dashboards,
-                performing statistical analysis, and creating data-driven solutions
-                that drive business growth.
+                I transform complex data into actionable insights that drive business growth. 
+                With a passion for uncovering hidden patterns and creating meaningful visualizations, 
+                I help organizations make data-driven decisions with confidence and clarity.
               </Typography>
             </motion.div>
 
+            {/* Action Buttons */}
             <motion.div
-              initial={{ opacity: 0, y: 50 }}
+              initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.8 }}
+              transition={{ duration: 0.8, delay: 1.0 }}
             >
               <Stack
                 direction="row"
-                spacing={2}
-                justifyContent={{ xs: 'center', md: 'flex-start' }}
-                sx={{ mb: 4 }}
+                spacing={3}
+                justifyContent="center"
+                sx={{ mb: 6 }}
+                flexWrap="wrap"
               >
                 <Button
-                  variant="outlined"
+                  className="soft-button-outline"
                   size="large"
                   onClick={() => document.querySelector('#projects')?.scrollIntoView({ behavior: 'smooth' })}
                   sx={{
-                    borderColor: 'primary.main',
-                    color: 'primary.main',
                     px: 4,
                     py: 1.5,
                     fontSize: '1rem',
-                    fontWeight: 600,
+                    fontWeight: 500,
                     textTransform: 'none',
-                    borderRadius: 2,
-                    '&:hover': {
-                      backgroundColor: 'rgba(100, 255, 218, 0.1)',
-                      borderColor: 'primary.main',
-                    },
+                    borderRadius: '25px',
                   }}
                 >
                   View My Work
                 </Button>
                 <Button
-                  variant="contained"
+                  className="soft-button"
                   size="large"
                   onClick={() => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })}
                   sx={{
-                    backgroundColor: 'primary.main',
-                    color: 'background.default',
                     px: 4,
                     py: 1.5,
                     fontSize: '1rem',
-                    fontWeight: 600,
+                    fontWeight: 500,
                     textTransform: 'none',
-                    borderRadius: 2,
-                    '&:hover': {
-                      backgroundColor: 'rgba(100, 255, 218, 0.8)',
-                    },
+                    borderRadius: '25px',
                   }}
                 >
                   Get In Touch
@@ -201,15 +221,16 @@ const Hero = () => {
               </Stack>
             </motion.div>
 
+            {/* Social Links */}
             <motion.div
-              initial={{ opacity: 0, y: 50 }}
+              initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 1 }}
+              transition={{ duration: 0.8, delay: 1.2 }}
             >
               <Stack
                 direction="row"
                 spacing={2}
-                justifyContent={{ xs: 'center', md: 'flex-start' }}
+                justifyContent="center"
               >
                 {socialLinks.map((link, index) => (
                   <motion.div
@@ -223,12 +244,19 @@ const Hero = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                       sx={{
-                        color: 'text.secondary',
+                        color: link.color,
+                        backgroundColor: 'rgba(255, 255, 255, 0.8)',
+                        backdropFilter: 'blur(10px)',
+                        border: '1px solid rgba(107, 115, 255, 0.1)',
+                        boxShadow: '0 4px 20px rgba(107, 115, 255, 0.1)',
                         '&:hover': {
-                          color: 'primary.main',
+                          backgroundColor: 'rgba(255, 255, 255, 0.9)',
                           transform: 'translateY(-2px)',
+                          boxShadow: '0 8px 30px rgba(107, 115, 255, 0.2)',
                         },
                         transition: 'all 0.3s ease',
+                        width: 56,
+                        height: 56,
                       }}
                     >
                       {link.icon}
@@ -236,29 +264,6 @@ const Hero = () => {
                   </motion.div>
                 ))}
               </Stack>
-            </motion.div>
-          </Box>
-
-          {/* Right Side - Profile Image */}
-          <Box sx={{ flex: { xs: 'none', md: 1 }, display: 'flex', justifyContent: 'center' }}>
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, delay: 0.5 }}
-              whileHover={{ scale: 1.05 }}
-            >
-              <Avatar
-                src="/api/placeholder/300/300"
-                alt="Profile Picture"
-                sx={{
-                  width: { xs: 200, md: 300, lg: 350 },
-                  height: { xs: 200, md: 300, lg: 350 },
-                  border: '4px solid',
-                  borderColor: 'primary.main',
-                  boxShadow: '0 0 50px rgba(100, 255, 218, 0.3)',
-                  transition: 'all 0.3s ease',
-                }}
-              />
             </motion.div>
           </Box>
         </Box>
@@ -279,24 +284,36 @@ const Hero = () => {
         <IconButton
           onClick={scrollToAbout}
           sx={{
-            color: 'primary.main',
-            animation: 'bounce 2s infinite',
-            '@keyframes bounce': {
-              '0%, 20%, 50%, 80%, 100%': {
-                transform: 'translateY(0)',
-              },
-              '40%': {
-                transform: 'translateY(-10px)',
-              },
-              '60%': {
-                transform: 'translateY(-5px)',
-              },
+            color: '#6B73FF',
+            backgroundColor: 'rgba(255, 255, 255, 0.8)',
+            backdropFilter: 'blur(10px)',
+            border: '1px solid rgba(107, 115, 255, 0.1)',
+            boxShadow: '0 4px 20px rgba(107, 115, 255, 0.1)',
+            animation: 'gentleBounce 2s infinite',
+            '&:hover': {
+              backgroundColor: 'rgba(255, 255, 255, 0.9)',
+              transform: 'translateY(-2px)',
             },
+            transition: 'all 0.3s ease',
           }}
         >
           <KeyboardArrowDown fontSize="large" />
         </IconButton>
       </motion.div>
+
+      <style jsx>{`
+        @keyframes gentleBounce {
+          0%, 20%, 50%, 80%, 100% {
+            transform: translateY(0);
+          }
+          40% {
+            transform: translateY(-10px);
+          }
+          60% {
+            transform: translateY(-5px);
+          }
+        }
+      `}</style>
     </Box>
   );
 };

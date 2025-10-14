@@ -8,15 +8,12 @@ import {
   CardContent,
   LinearProgress,
   Stack,
-  Chip,
 } from '@mui/material';
 import {
   Code,
-  BarChart,
+  Dashboard,
   Cloud,
   Storage,
-  Psychology,
-  TrendingUp,
 } from '@mui/icons-material';
 import { motion } from 'framer-motion';
 
@@ -25,78 +22,49 @@ const Skills = () => {
     {
       title: 'Programming Languages',
       icon: <Code />,
-      color: '#64ffda',
+      color: '#6B73FF',
       skills: [
-        { name: 'Python', level: 95, description: 'Pandas, NumPy, Scikit-learn, Matplotlib' },
-        { name: 'R', level: 88, description: 'dplyr, ggplot2, tidyverse, Shiny' },
-        { name: 'SQL', level: 92, description: 'PostgreSQL, MySQL, SQL Server, BigQuery' },
-        { name: 'JavaScript', level: 75, description: 'D3.js, React, Node.js' },
+        { name: 'Python', level: 95 },
+        { name: 'R', level: 90 },
+        { name: 'SQL', level: 95 },
+        { name: 'JavaScript', level: 80 },
+        { name: 'Scala', level: 75 },
       ],
     },
     {
-      title: 'Data Visualization',
-      icon: <BarChart />,
-      color: '#f50057',
+      title: 'Visualization Tools',
+      icon: <Dashboard />,
+      color: '#81C784',
       skills: [
-        { name: 'Tableau', level: 90, description: 'Advanced dashboards, calculated fields, LOD' },
-        { name: 'Power BI', level: 85, description: 'DAX, Power Query, custom visuals' },
-        { name: 'Matplotlib/Seaborn', level: 88, description: 'Statistical plots, customization' },
-        { name: 'Plotly', level: 82, description: 'Interactive visualizations, Dash apps' },
+        { name: 'Tableau', level: 95 },
+        { name: 'Power BI', level: 90 },
+        { name: 'Matplotlib', level: 85 },
+        { name: 'Seaborn', level: 85 },
+        { name: 'Plotly', level: 80 },
       ],
     },
     {
-      title: 'Cloud Platforms',
+      title: 'Cloud Services',
       icon: <Cloud />,
-      color: '#ff9800',
+      color: '#6B73FF',
       skills: [
-        { name: 'AWS', level: 80, description: 'S3, Redshift, Lambda, SageMaker' },
-        { name: 'Google Cloud', level: 75, description: 'BigQuery, Cloud ML, Data Studio' },
-        { name: 'Azure', level: 70, description: 'Azure ML, Data Factory, Synapse' },
-        { name: 'Snowflake', level: 78, description: 'Data warehousing, optimization' },
+        { name: 'AWS', level: 85 },
+        { name: 'Google Cloud', level: 80 },
+        { name: 'Azure', level: 75 },
+        { name: 'Snowflake', level: 90 },
+        { name: 'Databricks', level: 85 },
       ],
     },
     {
-      title: 'Databases & Tools',
+      title: 'Databases',
       icon: <Storage />,
-      color: '#4caf50',
+      color: '#81C784',
       skills: [
-        { name: 'PostgreSQL', level: 90, description: 'Query optimization, indexing' },
-        { name: 'MongoDB', level: 75, description: 'Aggregation pipelines, indexing' },
-        { name: 'Apache Spark', level: 72, description: 'PySpark, data processing' },
-        { name: 'Airflow', level: 80, description: 'ETL pipelines, scheduling' },
+        { name: 'PostgreSQL', level: 90 },
+        { name: 'MySQL', level: 85 },
+        { name: 'MongoDB', level: 80 },
       ],
     },
-    {
-      title: 'Machine Learning',
-      icon: <Psychology />,
-      color: '#9c27b0',
-      skills: [
-        { name: 'Scikit-learn', level: 88, description: 'Classification, regression, clustering' },
-        { name: 'TensorFlow', level: 75, description: 'Neural networks, deep learning' },
-        { name: 'Statistical Modeling', level: 90, description: 'Hypothesis testing, ANOVA' },
-        { name: 'Time Series', level: 85, description: 'ARIMA, Prophet, forecasting' },
-      ],
-    },
-    {
-      title: 'Business Intelligence',
-      icon: <TrendingUp />,
-      color: '#ff5722',
-      skills: [
-        { name: 'Excel/VBA', level: 92, description: 'Advanced formulas, macros, pivot tables' },
-        { name: 'Google Analytics', level: 85, description: 'Web analytics, conversion tracking' },
-        { name: 'SPSS', level: 80, description: 'Statistical analysis, survey research' },
-        { name: 'Looker', level: 75, description: 'LookML, data modeling' },
-      ],
-    },
-  ];
-
-  const certifications = [
-    'AWS Certified Cloud Practitioner',
-    'Tableau Desktop Specialist',
-    'Google Analytics Certified',
-    'Microsoft Power BI Certified',
-    'Python for Data Science (Coursera)',
-    'Advanced SQL (HackerRank)',
   ];
 
   return (
@@ -104,7 +72,7 @@ const Skills = () => {
       id="skills"
       className="section-padding"
       sx={{
-        backgroundColor: 'background.default',
+        backgroundColor: 'transparent',
         py: { xs: 8, md: 12 },
       }}
     >
@@ -120,7 +88,7 @@ const Skills = () => {
             sx={{
               textAlign: 'center',
               mb: 2,
-              fontWeight: 700,
+              fontWeight: 300,
               color: 'text.primary',
             }}
           >
@@ -134,57 +102,52 @@ const Skills = () => {
               mb: 8,
               maxWidth: '600px',
               mx: 'auto',
+              fontSize: '1.1rem',
+              lineHeight: 1.7,
             }}
           >
-            A comprehensive overview of my technical skills, tools, and technologies 
-            I use to transform data into actionable insights
+            A comprehensive overview of my technical skills and proficiency levels
+            across various data analysis tools and technologies
           </Typography>
         </motion.div>
 
-        <Grid container spacing={4}>
+        <Grid container spacing={4} justifyContent="center">
           {skillCategories.map((category, categoryIndex) => (
-            <Grid item xs={12} md={6} key={category.title}>
+            <Grid item xs={12} md={6} lg={5} key={category.title}>
               <motion.div
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: categoryIndex * 0.1 }}
                 viewport={{ once: true }}
               >
-                <Card
-                  sx={{
-                    height: '100%',
-                    backgroundColor: 'background.paper',
-                    border: '1px solid rgba(100, 255, 218, 0.2)',
-                    borderRadius: 3,
-                    '&:hover': {
-                      borderColor: 'primary.main',
-                      boxShadow: '0 10px 30px rgba(100, 255, 218, 0.2)',
-                    },
-                    transition: 'all 0.3s ease',
-                  }}
-                >
-                  <CardContent sx={{ p: 3 }}>
+                <Card className="soothing-card" sx={{ height: '100%' }}>
+                  <CardContent sx={{ p: 4 }}>
                     <Box
                       sx={{
                         display: 'flex',
                         alignItems: 'center',
                         mb: 3,
+                        gap: 2,
                       }}
                     >
                       <Box
                         sx={{
-                          color: category.color,
-                          mr: 2,
+                          width: 50,
+                          height: 50,
+                          borderRadius: '50%',
+                          backgroundColor: category.color,
                           display: 'flex',
                           alignItems: 'center',
+                          justifyContent: 'center',
+                          color: 'white',
                         }}
                       >
-                        {React.cloneElement(category.icon, { fontSize: 'large' })}
+                        {category.icon}
                       </Box>
                       <Typography
                         variant="h5"
                         sx={{
-                          fontWeight: 600,
+                          fontWeight: 500,
                           color: 'text.primary',
                         }}
                       >
@@ -196,25 +159,18 @@ const Skills = () => {
                       {category.skills.map((skill, skillIndex) => (
                         <motion.div
                           key={skill.name}
-                          initial={{ opacity: 0, x: -20 }}
+                          initial={{ opacity: 0, x: -30 }}
                           whileInView={{ opacity: 1, x: 0 }}
-                          transition={{ duration: 0.5, delay: skillIndex * 0.1 }}
+                          transition={{ duration: 0.4, delay: skillIndex * 0.05 }}
                           viewport={{ once: true }}
                         >
-                          <Box>
-                            <Box
-                              sx={{
-                                display: 'flex',
-                                justifyContent: 'space-between',
-                                alignItems: 'center',
-                                mb: 1,
-                              }}
-                            >
+                          <Box sx={{ mb: 1 }}>
+                            <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
                               <Typography
-                                variant="h6"
+                                variant="body1"
                                 sx={{
-                                  fontWeight: 500,
                                   color: 'text.primary',
+                                  fontWeight: 500,
                                 }}
                               >
                                 {skill.name}
@@ -222,36 +178,25 @@ const Skills = () => {
                               <Typography
                                 variant="body2"
                                 sx={{
-                                  color: 'primary.main',
-                                  fontWeight: 600,
+                                  color: 'text.secondary',
+                                  fontWeight: 500,
                                 }}
                               >
                                 {skill.level}%
                               </Typography>
                             </Box>
-                            <LinearProgress
-                              variant="determinate"
-                              value={skill.level}
-                              sx={{
-                                height: 8,
-                                borderRadius: 4,
-                                backgroundColor: 'rgba(136, 146, 176, 0.2)',
-                                mb: 1,
-                                '& .MuiLinearProgress-bar': {
-                                  backgroundColor: category.color,
-                                  borderRadius: 4,
-                                },
-                              }}
-                            />
-                            <Typography
-                              variant="body2"
-                              sx={{
-                                color: 'text.secondary',
-                                fontSize: '0.875rem',
-                              }}
-                            >
-                              {skill.description}
-                            </Typography>
+                            <Box className="skill-bar">
+                              <motion.div
+                                className="skill-progress"
+                                initial={{ width: 0 }}
+                                whileInView={{ width: `${skill.level}%` }}
+                                transition={{ duration: 1, delay: skillIndex * 0.1 }}
+                                viewport={{ once: true }}
+                                style={{
+                                  background: `linear-gradient(90deg, ${category.color} 0%, ${category.color}80 100%)`,
+                                }}
+                              />
+                            </Box>
                           </Box>
                         </motion.div>
                       ))}
@@ -270,90 +215,123 @@ const Skills = () => {
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <Box sx={{ mt: 8 }}>
-            <Typography
-              variant="h4"
-              sx={{
-                textAlign: 'center',
-                mb: 4,
-                fontWeight: 600,
-                color: 'text.primary',
-              }}
-            >
-              Certifications & <span className="gradient-text">Achievements</span>
-            </Typography>
-            
-            <Card
-              sx={{
-                backgroundColor: 'background.paper',
-                border: '1px solid rgba(100, 255, 218, 0.2)',
-                borderRadius: 3,
-                p: 3,
-              }}
-            >
-              <Stack
-                direction="row"
-                flexWrap="wrap"
-                gap={2}
-                justifyContent="center"
-              >
-                {certifications.map((cert, index) => (
-                  <motion.div
-                    key={cert}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.3, delay: index * 0.1 }}
-                    viewport={{ once: true }}
-                  >
-                    <Chip
-                      label={cert}
-                      sx={{
-                        backgroundColor: 'rgba(100, 255, 218, 0.1)',
-                        color: 'primary.main',
-                        border: '1px solid rgba(100, 255, 218, 0.3)',
-                        fontWeight: 500,
-                        fontSize: '0.875rem',
-                        py: 2,
-                        px: 1,
-                        '&:hover': {
-                          backgroundColor: 'rgba(100, 255, 218, 0.2)',
-                          transform: 'translateY(-2px)',
-                        },
-                        transition: 'all 0.3s ease',
-                      }}
-                    />
-                  </motion.div>
-                ))}
-              </Stack>
-            </Card>
-          </Box>
-        </motion.div>
+          <Typography
+            variant="h3"
+            sx={{
+              textAlign: 'center',
+              mt: 8,
+              mb: 4,
+              fontWeight: 300,
+              color: 'text.primary',
+            }}
+          >
+            Certifications & <span className="gradient-text">Achievements</span>
+          </Typography>
+          <Typography
+            variant="body1"
+            sx={{
+              textAlign: 'center',
+              color: 'text.secondary',
+              mb: 6,
+              maxWidth: '600px',
+              mx: 'auto',
+              fontSize: '1.1rem',
+            }}
+          >
+            Professional certifications and notable achievements in data analytics
+          </Typography>
 
-        {/* Skills Summary */}
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-        >
-          <Box sx={{ mt: 6, textAlign: 'center' }}>
-            <Typography
-              variant="body1"
-              sx={{
-                color: 'text.secondary',
-                maxWidth: '800px',
-                mx: 'auto',
-                lineHeight: 1.8,
-                fontSize: '1.1rem',
-              }}
-            >
-              With expertise spanning across the entire data analytics lifecycle, 
-              I combine technical proficiency with business acumen to deliver 
-              data-driven solutions that create measurable impact. My diverse 
-              skill set enables me to work effectively across different industries 
-              and collaborate with cross-functional teams.
-            </Typography>
-          </Box>
+          <Grid container spacing={3} justifyContent="center">
+            {[
+              {
+                title: 'AWS Certified Data Analytics',
+                issuer: 'Amazon Web Services',
+                year: '2023',
+                description: 'Specialty certification in data analytics on AWS platform',
+              },
+              {
+                title: 'Tableau Desktop Specialist',
+                issuer: 'Tableau Software',
+                year: '2022',
+                description: 'Certified in Tableau desktop visualization and analytics',
+              },
+              {
+                title: 'Google Data Analytics Certificate',
+                issuer: 'Google',
+                year: '2021',
+                description: 'Professional certificate in data analytics fundamentals',
+              },
+              {
+                title: 'Microsoft Certified: Data Analyst Associate',
+                issuer: 'Microsoft',
+                year: '2022',
+                description: 'Power BI and Excel data analysis certification',
+              },
+            ].map((cert, index) => (
+              <Grid item xs={12} sm={6} md={3} key={cert.title}>
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                  whileHover={{ y: -5 }}
+                >
+                  <Card
+                    className="soothing-card hover-lift"
+                    sx={{
+                      height: '100%',
+                      textAlign: 'center',
+                      p: 2,
+                    }}
+                  >
+                    <CardContent>
+                      <Typography
+                        variant="h6"
+                        sx={{
+                          mb: 1,
+                          fontWeight: 500,
+                          color: 'text.primary',
+                          fontSize: '1rem',
+                        }}
+                      >
+                        {cert.title}
+                      </Typography>
+                      <Typography
+                        variant="body2"
+                        sx={{
+                          color: 'primary.main',
+                          fontWeight: 500,
+                          mb: 1,
+                        }}
+                      >
+                        {cert.issuer}
+                      </Typography>
+                      <Typography
+                        variant="body2"
+                        sx={{
+                          color: 'text.secondary',
+                          mb: 2,
+                          fontWeight: 500,
+                        }}
+                      >
+                        {cert.year}
+                      </Typography>
+                      <Typography
+                        variant="body2"
+                        sx={{
+                          color: 'text.secondary',
+                          lineHeight: 1.5,
+                          fontSize: '0.875rem',
+                        }}
+                      >
+                        {cert.description}
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              </Grid>
+            ))}
+          </Grid>
         </motion.div>
       </Container>
     </Box>
