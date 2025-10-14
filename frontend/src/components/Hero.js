@@ -77,7 +77,25 @@ const Hero = () => {
             transition={{ duration: 0.8 }}
           >
             <Chip
-              label="Available for Opportunities"
+              label={
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                  <Box
+                    sx={{
+                      width: 8,
+                      height: 8,
+                      borderRadius: '50%',
+                      backgroundColor: '#4CAF50',
+                      animation: 'pulse 2s infinite',
+                      '@keyframes pulse': {
+                        '0%': { opacity: 1 },
+                        '50%': { opacity: 0.5 },
+                        '100%': { opacity: 1 },
+                      },
+                    }}
+                  />
+                  Available for Opportunities
+                </Box>
+              }
               sx={{
                 background: 'linear-gradient(135deg, #6B73FF 0%, #81C784 100%)',
                 color: 'white',

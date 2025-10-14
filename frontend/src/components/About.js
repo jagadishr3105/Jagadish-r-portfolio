@@ -177,8 +177,35 @@ const About = () => {
       location: 'Chennai, India',
       period: 'Jun 2013 – May 2017',
       description: 'Comprehensive engineering program covering mechanical systems, design principles, and manufacturing processes',
-      gpa: '3.6/4.0',
+      gpa: '6.7/10',
       relevantCoursework: ['Engineering Mathematics', 'Thermodynamics', 'Machine Design', 'Manufacturing Processes', 'CAD/CAM'],
+      color: '#81C784',
+    },
+  ];
+
+  const certifications = [
+    {
+      name: 'Lean Six Sigma Yellow Belt',
+      issuer: 'AIGPE',
+      year: '2023',
+      color: '#6B73FF',
+    },
+    {
+      name: 'Tableau',
+      issuer: 'Udemy',
+      year: '2022',
+      color: '#81C784',
+    },
+    {
+      name: 'Executing Basic ERP Processes with SAP S/4HANA',
+      issuer: 'SAP',
+      year: '2021',
+      color: '#6B73FF',
+    },
+    {
+      name: 'Introduction to Python',
+      issuer: 'University of Michigan',
+      year: '2020',
       color: '#81C784',
     },
   ];
@@ -344,14 +371,14 @@ const About = () => {
                       fontSize: '1.1rem',
                     }}
                   >
-                    I'm a passionate Data Analyst with over 5 years of experience in transforming
-                    raw data into meaningful insights that drive business decisions. My journey began
-                    with a degree in Statistics and has evolved into a career focused on uncovering
-                    patterns, trends, and opportunities hidden within data. I specialize in creating
-                    interactive dashboards, performing statistical analysis, and building predictive
-                    models. My expertise spans across various industries including finance, healthcare,
-                    and e-commerce, where I've helped organizations increase efficiency and profitability
-                    through data-driven strategies.
+                    I'm a dedicated Data Analyst with over 7 years of experience across diverse industries,
+                    currently working at Nike where I analyze user behavior and CRM data to drive business insights.
+                    My journey began with a Mechanical Engineering background and evolved through an MBA and MS in
+                    Engineering Management, leading to expertise in data analysis, operations optimization, and
+                    business intelligence. I specialize in SQL/Python analytics, Power BI/Tableau dashboards, and
+                    A/B testing frameworks. My experience spans manufacturing operations, media production, and
+                    consumer retail, where I've consistently delivered measurable improvements in efficiency,
+                    cost reduction, and strategic decision-making through data-driven approaches.
               </Typography>
                   <Stack direction="row" flexWrap="wrap" gap={1.5} justifyContent="center">
                     {skills.map((skill, index) => (
@@ -937,6 +964,85 @@ const About = () => {
                 </Card>
               </Grid>
             </Grid>
+
+            {/* Certifications Section */}
+            <Box sx={{ mt: 6, width: '100%' }}>
+              <Typography
+                variant="h4"
+                sx={{
+                  mb: 4,
+                  fontWeight: 300,
+                  color: 'text.primary',
+                  textAlign: 'center',
+                }}
+              >
+                Professional <span className="gradient-text">Certifications</span>
+              </Typography>
+              <Grid container spacing={3} justifyContent="center">
+                {certifications.map((cert, index) => (
+                  <Grid item xs={12} sm={6} md={3} key={cert.name}>
+                    <motion.div
+                      initial={{ opacity: 0, y: 30 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.6, delay: index * 0.1 }}
+                      viewport={{ once: true }}
+                    >
+                      <Card
+                        className="soothing-card"
+                        sx={{
+                          textAlign: 'center',
+                          p: 3,
+                          height: '100%',
+                          display: 'flex',
+                          flexDirection: 'column',
+                          justifyContent: 'center',
+                          border: `2px solid ${cert.color}20`,
+                          '&:hover': {
+                            border: `2px solid ${cert.color}`,
+                            transform: 'translateY(-5px)',
+                            boxShadow: `0 8px 25px ${cert.color}30`,
+                          },
+                          transition: 'all 0.3s ease',
+                        }}
+                      >
+                        <CardContent>
+                          <Typography
+                            variant="h6"
+                            sx={{
+                              fontWeight: 500,
+                              color: 'text.primary',
+                              mb: 1,
+                              fontSize: '1rem',
+                            }}
+                          >
+                            {cert.name}
+                          </Typography>
+                          <Typography
+                            variant="body2"
+                            sx={{
+                              color: cert.color,
+                              fontWeight: 500,
+                              mb: 0.5,
+                            }}
+                          >
+                            {cert.issuer}
+                          </Typography>
+                          <Typography
+                            variant="body2"
+                            sx={{
+                              color: 'text.secondary',
+                              fontSize: '0.9rem',
+                            }}
+                          >
+                            {cert.year}
+                          </Typography>
+                        </CardContent>
+                      </Card>
+                    </motion.div>
+                  </Grid>
+                ))}
+              </Grid>
+            </Box>
           </Box>
         </TabPanel>
       </Container>

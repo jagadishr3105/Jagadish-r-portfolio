@@ -50,7 +50,6 @@ const Skills = () => {
         { name: 'AWS', level: 85 },
         { name: 'Google Cloud', level: 80 },
         { name: 'Azure', level: 75 },
-        { name: 'Snowflake', level: 90 },
         { name: 'Databricks', level: 85 },
       ],
     },
