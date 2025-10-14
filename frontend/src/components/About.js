@@ -314,10 +314,10 @@ const About = () => {
             >
               <Card className="soothing-card" sx={{ p: 4, mb: 4, maxWidth: '800px', mx: 'auto' }}>
                 <CardContent>
-                  <Typography
+              <Typography
                     variant="h4"
-                    sx={{
-                      mb: 3,
+                sx={{
+                  mb: 3,
                       fontWeight: 400,
                       color: 'text.primary',
                       display: 'flex',
@@ -327,13 +327,13 @@ const About = () => {
                     }}
                   >
                     <Code sx={{ color: 'primary.main' }} /> Professional Summary
-                  </Typography>
-                  <Typography
-                    variant="body1"
-                    sx={{
-                      color: 'text.secondary',
-                      lineHeight: 1.8,
-                      mb: 3,
+              </Typography>
+              <Typography
+                variant="body1"
+                sx={{
+                  color: 'text.secondary',
+                  lineHeight: 1.8,
+                  mb: 3,
                       textAlign: 'center',
                       fontSize: '1.1rem',
                     }}
@@ -346,111 +346,111 @@ const About = () => {
                     models. My expertise spans across various industries including finance, healthcare,
                     and e-commerce, where I've helped organizations increase efficiency and profitability
                     through data-driven strategies.
-                  </Typography>
+              </Typography>
                   <Stack direction="row" flexWrap="wrap" gap={1.5} justifyContent="center">
                     {skills.map((skill, index) => (
-                      <motion.div
+            <motion.div
                         key={skill}
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 0.3, delay: index * 0.05 }}
-                        viewport={{ once: true }}
-                      >
-                        <Chip
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.3, delay: index * 0.05 }}
+                      viewport={{ once: true }}
+                    >
+                      <Chip
                           label={skill}
-                          sx={{
+                        sx={{
                             backgroundColor: 'rgba(107, 115, 255, 0.1)',
-                            color: 'primary.main',
+                          color: 'primary.main',
                             border: '1px solid rgba(107, 115, 255, 0.2)',
-                            fontWeight: 500,
-                            '&:hover': {
+                          fontWeight: 500,
+                          '&:hover': {
                               backgroundColor: 'rgba(107, 115, 255, 0.15)',
-                              transform: 'translateY(-2px)',
-                            },
-                            transition: 'all 0.3s ease',
-                          }}
-                        />
-                      </motion.div>
-                    ))}
-                  </Stack>
+                            transform: 'translateY(-2px)',
+                          },
+                          transition: 'all 0.3s ease',
+                        }}
+                      />
+                    </motion.div>
+                  ))}
+                </Stack>
                 </CardContent>
               </Card>
             </motion.div>
 
             {/* Areas of Interest */}
-            <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-            >
-              <Typography
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+        >
+          <Typography
                 variant="h3"
-                sx={{
-                  textAlign: 'center',
-                  mb: 4,
+            sx={{
+              textAlign: 'center',
+              mb: 4,
                   fontWeight: 300,
-                  color: 'text.primary',
-                }}
-              >
-                Areas of <span className="gradient-text">Interest</span>
-              </Typography>
-
+              color: 'text.primary',
+            }}
+          >
+            Areas of <span className="gradient-text">Interest</span>
+          </Typography>
+          
               <Grid container spacing={3} justifyContent="center">
                 {areasOfInterest.map((interest, index) => (
-                  <Grid item xs={12} sm={6} md={3} key={interest.title}>
-                    <motion.div
-                      initial={{ opacity: 0, y: 30 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.6, delay: index * 0.1 }}
-                      viewport={{ once: true }}
-                      whileHover={{ y: -5 }}
-                    >
-                      <Card
+              <Grid item xs={12} sm={6} md={3} key={interest.title}>
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                  whileHover={{ y: -5 }}
+                >
+                  <Card
                         className="soothing-card hover-lift"
+                    sx={{
+                      height: '100%',
+                      textAlign: 'center',
+                      p: 2,
+                    }}
+                  >
+                    <CardContent>
+                      <Box
                         sx={{
-                          height: '100%',
-                          textAlign: 'center',
-                          p: 2,
+                              color: interest.color,
+                          mb: 2,
+                          display: 'flex',
+                          justifyContent: 'center',
                         }}
                       >
-                        <CardContent>
-                          <Box
-                            sx={{
-                              color: interest.color,
-                              mb: 2,
-                              display: 'flex',
-                              justifyContent: 'center',
-                            }}
-                          >
                             {interest.icon}
-                          </Box>
-                          <Typography
-                            variant="h6"
-                            sx={{
-                              mb: 2,
+                      </Box>
+                      <Typography
+                        variant="h6"
+                        sx={{
+                          mb: 2,
                               fontWeight: 500,
-                              color: 'text.primary',
-                            }}
-                          >
-                            {interest.title}
-                          </Typography>
-                          <Typography
-                            variant="body2"
-                            sx={{
-                              color: 'text.secondary',
-                              lineHeight: 1.6,
-                            }}
-                          >
-                            {interest.description}
-                          </Typography>
-                        </CardContent>
-                      </Card>
-                    </motion.div>
-                  </Grid>
-                ))}
+                          color: 'text.primary',
+                        }}
+                      >
+                        {interest.title}
+                      </Typography>
+                      <Typography
+                        variant="body2"
+                        sx={{
+                          color: 'text.secondary',
+                          lineHeight: 1.6,
+                        }}
+                      >
+                        {interest.description}
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                </motion.div>
               </Grid>
-            </motion.div>
+            ))}
+          </Grid>
+        </motion.div>
           </Box>
         </TabPanel>
 

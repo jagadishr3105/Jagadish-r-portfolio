@@ -9,7 +9,6 @@ import {
   Button,
   Chip,
   Stack,
-  IconButton,
 } from '@mui/material';
 import {
   GitHub,
