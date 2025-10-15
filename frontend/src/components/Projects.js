@@ -59,10 +59,10 @@ const Projects = () => {
         'Compare region performance effectively',
         'Detect underperforming areas and products'
       ],
-      githubUrl: 'https://github.com/jagadishr3105/supply-chain-sql-projec',
+      githubUrl: 'https://github.com/jagadishr3105/supply-chain-sql-project',
       category: 'SQL Analytics',
       icon: <Storage />,
-      image: 'https://via.placeholder.com/400x250/E0F2F1/2C3E50?text=SQL+Analytics',
+      image: '/images/sql-project.png',
     },
     {
       id: 2,
@@ -88,7 +88,7 @@ const Projects = () => {
       githubUrl: 'https://github.com/jagadishr3105/DemandForecasting-',
       category: 'Time Series',
       icon: <TrendingUp />,
-      image: 'https://via.placeholder.com/400x250/E8EAF6/2C3E50?text=Demand+Forecasting',
+      image: '/images/demand-forecasting.png',
     },
     {
       id: 3,
@@ -113,7 +113,7 @@ const Projects = () => {
       githubUrl: 'https://github.com/jagadishr3105/Amazon_logistics-analysis',
       category: 'Logistics',
       icon: <Analytics />,
-      image: 'https://via.placeholder.com/400x250/F3E5F5/2C3E50?text=Logistics+Analysis',
+      image: '/images/amazon-project.png',
     },
     {
       id: 4,
@@ -139,7 +139,7 @@ const Projects = () => {
       githubUrl: 'https://github.com/jagadishr3105/Quality-Engineering-CAPA-CaseStudy',
       category: 'Quality Engineering',
       icon: <Engineering />,
-      image: 'https://via.placeholder.com/400x250/FFF3E0/2C3E50?text=Quality+Engineering',
+      image: '/images/capa-project.png',
     },
   ];
 
@@ -199,49 +199,68 @@ const Projects = () => {
             technical expertise and business impact across various domains.
           </Typography>
 
-          <Grid container spacing={3} justifyContent="center" sx={{ width: '100%' }}>
+          <Grid container spacing={4} justifyContent="center" sx={{ width: '100%' }}>
             {projects.map((project, index) => (
-              <Grid item xs={12} sm={6} md={6} lg={6} key={project.id}>
+              <Grid item xs={12} sm={6} md={6} lg={6} key={project.id} sx={{ display: 'flex' }}>
               <motion.div
                   initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                  whileHover={{ y: -5 }}
+                  whileHover={{ y: -8, scale: 1.02 }}
               >
                   <Card
-                    className="soothing-card hover-lift"
+                    className="uniform-card"
                     sx={{
-                      height: '100%',
+                      height: '400px',
+                      width: '100%',
                       cursor: 'pointer',
-                      transition: 'all 0.3s ease',
+                      transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
                       display: 'flex',
                       flexDirection: 'column',
-                      minHeight: '400px',
+                      background: 'rgba(255, 255, 255, 0.95)',
+                      backdropFilter: 'blur(15px)',
+                      border: '1px solid rgba(107, 115, 255, 0.15)',
+                      borderRadius: '16px',
+                      boxShadow: '0 8px 32px rgba(107, 115, 255, 0.1)',
+                      overflow: 'hidden',
+                      flexGrow: 1,
                       '&:hover': {
-                        boxShadow: '0 8px 25px rgba(107, 115, 255, 0.15)',
+                        boxShadow: '0 16px 48px rgba(107, 115, 255, 0.2)',
+                        transform: 'translateY(-8px) scale(1.02)',
+                        border: '1px solid rgba(107, 115, 255, 0.3)',
                       },
                     }}
                     onClick={() => handleProjectClick(project)}
                   >
-                    <CardMedia
-                      component="img"
-                      height="200"
-                      image={project.image}
-                      alt={project.title}
-                      sx={{
-                        objectFit: 'cover',
-                      }}
-                    />
-                    <CardContent sx={{ p: 3, flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
-                      <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+                    <CardContent sx={{ 
+                      p: 3, 
+                      flexGrow: 1, 
+                      display: 'flex', 
+                      flexDirection: 'column',
+                      justifyContent: 'space-between',
+                      height: '100%',
+                      gap: 2,
+                    }}>
+                      <Box sx={{ 
+                        display: 'flex', 
+                        alignItems: 'center', 
+                        gap: 2,
+                        minHeight: '48px',
+                        flexShrink: 0,
+                      }}>
                         <Box
                           sx={{
-                            p: 1,
-                            borderRadius: '8px',
+                            p: 1.5,
+                            borderRadius: '12px',
                             backgroundColor: 'primary.main',
                             color: 'white',
-                            mr: 2,
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            minWidth: '48px',
+                            minHeight: '48px',
+                            flexShrink: 0,
                           }}
                         >
                           {project.icon}
@@ -252,17 +271,27 @@ const Projects = () => {
                           sx={{
                             backgroundColor: 'rgba(107, 115, 255, 0.1)',
                             color: 'primary.main',
-                            fontWeight: 500,
+                            fontWeight: 600,
+                            borderRadius: '20px',
+                            fontSize: '0.75rem',
+                            height: '28px',
                           }}
                         />
                       </Box>
                       <Typography
                         variant="h5"
                         sx={{
-                          fontWeight: 500,
+                          fontWeight: 600,
                           color: 'text.primary',
-                          mb: 2,
                           fontSize: '1.2rem',
+                          lineHeight: 1.4,
+                          minHeight: '72px',
+                          display: 'flex',
+                          alignItems: 'flex-start',
+                          wordWrap: 'break-word',
+                          overflowWrap: 'break-word',
+                          hyphens: 'auto',
+                          flexShrink: 0,
                         }}
                       >
                         {project.title}
@@ -272,27 +301,75 @@ const Projects = () => {
                         sx={{
                           color: 'text.secondary',
                           lineHeight: 1.6,
-                          mb: 3,
                           flexGrow: 1,
+                          fontSize: '0.9rem',
+                          minHeight: '72px',
+                          display: 'flex',
+                          alignItems: 'flex-start',
+                          wordWrap: 'break-word',
+                          overflowWrap: 'break-word',
+                          textAlign: 'left',
                         }}
                       >
                         {project.brief}
                       </Typography>
+                      <Stack 
+                        direction="row" 
+                        flexWrap="wrap" 
+                        gap={0.5} 
+                        sx={{ 
+                          flexShrink: 0,
+                          minHeight: '32px',
+                          alignItems: 'flex-start',
+                        }}
+                      >
+                        {project.techStack.slice(0, 4).map((tech, techIndex) => (
+                          <Chip
+                            key={techIndex}
+                            label={tech}
+                            size="small"
+                            sx={{
+                              backgroundColor: 'rgba(107, 115, 255, 0.08)',
+                              color: 'text.secondary',
+                              fontWeight: 500,
+                              fontSize: '0.7rem',
+                              height: '24px',
+                              '& .MuiChip-label': {
+                                px: 1,
+                              },
+                            }}
+                          />
+                        ))}
+                      </Stack>
                       <Button
                         variant="outlined"
                         size="small"
+                        startIcon={<GitHub />}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleGitHubClick(project.githubUrl);
+                        }}
                         sx={{
                           borderColor: 'primary.main',
                           color: 'primary.main',
-                          alignSelf: 'flex-start',
+                          borderRadius: '20px',
+                          px: 3,
+                          py: 1,
+                          fontWeight: 600,
+                          fontSize: '0.8rem',
+                          textTransform: 'none',
+                          transition: 'all 0.3s ease',
                           mt: 'auto',
+                          alignSelf: 'flex-start',
                           '&:hover': {
                             backgroundColor: 'primary.main',
                             color: 'white',
+                            transform: 'translateY(-2px)',
+                            boxShadow: '0 4px 15px rgba(107, 115, 255, 0.3)',
                           },
                         }}
                       >
-                        View Details
+                        View Code
                       </Button>
                     </CardContent>
                 </Card>
@@ -311,12 +388,13 @@ const Projects = () => {
         fullWidth
         PaperProps={{
           sx: {
-            backgroundColor: 'background.paper',
-            backgroundImage: 'none',
-            backdropFilter: 'blur(10px)',
+            backgroundColor: 'rgba(255, 255, 255, 0.95)',
+            backdropFilter: 'blur(20px)',
             border: '1px solid rgba(107, 115, 255, 0.2)',
-            borderRadius: 3,
-            boxShadow: '0 8px 32px rgba(107, 115, 255, 0.1)',
+            borderRadius: '24px',
+            boxShadow: '0 20px 60px rgba(107, 115, 255, 0.15)',
+            maxHeight: '90vh',
+            overflow: 'hidden',
           },
         }}
       >

@@ -27,9 +27,9 @@ import {
   Close,
   Star,
   CheckCircle,
-  TrendingUp,
   DataUsage,
   Psychology,
+  Engineering,
 } from '@mui/icons-material';
 import { motion } from 'framer-motion';
 
@@ -87,7 +87,7 @@ const About = () => {
 
   const skills = [
     'Data Analysis', 'Machine Learning', 'Python', 'Statistics', 
-    'R', 'SQL', 'Tableau', 'Power BI', 'ETL', 'AWS', 'GCP', 'Azure'
+    'R', 'SQL', 'Tableau', 'Power BI', 'ETL', 'AWS', 'GCP', 'Azure', 'Databases'
   ];
 
   const experience = [
@@ -198,6 +198,12 @@ const About = () => {
     { name: 'AWS', level: 80, color: '#6B73FF' },
   ];
 
+  const databasesSkills = [
+    { name: 'PostgreSQL', level: 90, color: '#6B73FF' },
+    { name: 'MySQL', level: 85, color: '#81C784' },
+    { name: 'MongoDB', level: 80, color: '#6B73FF' },
+  ];
+
   const areasOfInterest = [
     {
       icon: <DataUsage sx={{ fontSize: '2.5rem' }} />,
@@ -206,9 +212,9 @@ const About = () => {
       color: '#6B73FF',
     },
     {
-      icon: <TrendingUp sx={{ fontSize: '2.5rem' }} />,
-      title: 'Machine Learning',
-      description: 'Building predictive models and intelligent systems for various applications.',
+      icon: <Engineering sx={{ fontSize: '2.5rem' }} />,
+      title: 'Manufacturing',
+      description: 'Process optimization, quality control, and operational efficiency in manufacturing.',
       color: '#81C784',
     },
     {
@@ -848,13 +854,30 @@ const About = () => {
               My proficiency in various programming languages, tools, and platforms
             </Typography>
             <Grid container spacing={4} justifyContent="center">
-              <Grid item xs={12} md={6}>
-                <Card className="soothing-card" sx={{ p: 4 }}>
-                  <CardContent>
-                    <Typography variant="h5" sx={{ mb: 3, fontWeight: 500, color: 'primary.main', textAlign: 'center' }}>
+              <Grid item xs={12} md={4} sx={{ display: 'flex' }}>
+                <Card className="soothing-card" sx={{ p: 4, width: '100%', minHeight: '400px', display: 'flex', flexDirection: 'column' }}>
+                  <CardContent sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
+                    <Typography 
+                      variant="h5" 
+                      sx={{ 
+                        mb: 3, 
+                        fontWeight: 500, 
+                        color: 'primary.main', 
+                        textAlign: 'center', 
+                        minHeight: '80px', 
+                        display: 'flex', 
+                        alignItems: 'center', 
+                        justifyContent: 'center',
+                        wordWrap: 'break-word',
+                        overflowWrap: 'break-word',
+                        hyphens: 'auto',
+                        lineHeight: 1.2,
+                        fontSize: { xs: '1.1rem', md: '1.25rem' }
+                      }}
+                    >
                       Programming Languages
                     </Typography>
-                    <Stack spacing={3}>
+                    <Stack spacing={3} sx={{ flexGrow: 1, justifyContent: 'center' }}>
                       {programmingSkills.map((skill, index) => (
                         <motion.div
                           key={skill.name}
@@ -891,17 +914,94 @@ const About = () => {
                   </CardContent>
                 </Card>
               </Grid>
-              <Grid item xs={12} md={6}>
-                <Card className="soothing-card" sx={{ p: 4 }}>
-                  <CardContent>
-                    <Typography variant="h5" sx={{ mb: 3, fontWeight: 500, color: 'primary.main', textAlign: 'center' }}>
+              <Grid item xs={12} md={4} sx={{ display: 'flex' }}>
+                <Card className="soothing-card" sx={{ p: 4, width: '100%', minHeight: '400px', display: 'flex', flexDirection: 'column' }}>
+                  <CardContent sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
+                    <Typography 
+                      variant="h5" 
+                      sx={{ 
+                        mb: 3, 
+                        fontWeight: 500, 
+                        color: 'primary.main', 
+                        textAlign: 'center', 
+                        minHeight: '80px', 
+                        display: 'flex', 
+                        alignItems: 'center', 
+                        justifyContent: 'center',
+                        wordWrap: 'break-word',
+                        overflowWrap: 'break-word',
+                        hyphens: 'auto',
+                        lineHeight: 1.2,
+                        fontSize: { xs: '1.1rem', md: '1.25rem' }
+                      }}
+                    >
                       Tools & Platforms
                     </Typography>
-                    <Stack spacing={3}>
+                    <Stack spacing={3} sx={{ flexGrow: 1, justifyContent: 'center' }}>
                       {toolsSkills.map((skill, index) => (
                         <motion.div
                           key={skill.name}
                           initial={{ opacity: 0, x: 30 }}
+                          whileInView={{ opacity: 1, x: 0 }}
+                          transition={{ duration: 0.4, delay: index * 0.1 }}
+                          viewport={{ once: true }}
+                        >
+                          <Box sx={{ mb: 1 }}>
+                            <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
+                              <Typography variant="body1" sx={{ color: 'text.primary', fontWeight: 500 }}>
+                                {skill.name}
+                              </Typography>
+                              <Typography variant="body2" sx={{ color: 'text.secondary', fontWeight: 500 }}>
+                                {skill.level}%
+                              </Typography>
+                            </Box>
+                            <Box className="skill-bar">
+                              <motion.div
+                                className="skill-progress"
+                                initial={{ width: 0 }}
+                                whileInView={{ width: `${skill.level}%` }}
+                                transition={{ duration: 1, delay: index * 0.1 }}
+                                viewport={{ once: true }}
+                                style={{
+                                  background: `linear-gradient(90deg, ${skill.color} 0%, ${skill.color}80 100%)`,
+                                }}
+                              />
+                            </Box>
+                          </Box>
+                        </motion.div>
+                      ))}
+                    </Stack>
+                  </CardContent>
+                </Card>
+              </Grid>
+              <Grid item xs={12} md={4} sx={{ display: 'flex' }}>
+                <Card className="soothing-card" sx={{ p: 4, width: '100%', minHeight: '400px', display: 'flex', flexDirection: 'column' }}>
+                  <CardContent sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
+                    <Typography 
+                      variant="h5" 
+                      sx={{ 
+                        mb: 3, 
+                        fontWeight: 500, 
+                        color: 'primary.main', 
+                        textAlign: 'center', 
+                        minHeight: '80px', 
+                        display: 'flex', 
+                        alignItems: 'center', 
+                        justifyContent: 'center',
+                        wordWrap: 'break-word',
+                        overflowWrap: 'break-word',
+                        hyphens: 'auto',
+                        lineHeight: 1.2,
+                        fontSize: { xs: '1.1rem', md: '1.25rem' }
+                      }}
+                    >
+                      Databases
+                    </Typography>
+                    <Stack spacing={3} sx={{ flexGrow: 1, justifyContent: 'center' }}>
+                      {databasesSkills.map((skill, index) => (
+                        <motion.div
+                          key={skill.name}
+                          initial={{ opacity: 0, x: 0 }}
                           whileInView={{ opacity: 1, x: 0 }}
                           transition={{ duration: 0.4, delay: index * 0.1 }}
                           viewport={{ once: true }}

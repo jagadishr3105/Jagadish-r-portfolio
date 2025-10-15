@@ -109,35 +109,65 @@ const Skills = () => {
           </Typography>
         </motion.div>
 
-        <Grid container spacing={4} justifyContent="center">
+        <Grid container spacing={4} justifyContent="center" sx={{ width: '100%' }}>
           {skillCategories.map((category, categoryIndex) => (
-            <Grid item xs={12} md={6} lg={5} key={category.title}>
+            <Grid item xs={12} sm={6} md={6} lg={6} key={category.title}>
               <motion.div
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: categoryIndex * 0.1 }}
                 viewport={{ once: true }}
+                whileHover={{ y: -8, scale: 1.02 }}
               >
-                <Card className="soothing-card" sx={{ height: '100%' }}>
-                  <CardContent sx={{ p: 4 }}>
+                <Card
+                  className="uniform-card"
+                  sx={{
+                    height: '480px',
+                    width: '100%',
+                    transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    background: 'rgba(255, 255, 255, 0.9)',
+                    backdropFilter: 'blur(15px)',
+                    border: '1px solid rgba(107, 115, 255, 0.15)',
+                    borderRadius: '24px',
+                    boxShadow: '0 12px 40px rgba(107, 115, 255, 0.08)',
+                    overflow: 'hidden',
+                    '&:hover': {
+                      boxShadow: '0 20px 60px rgba(107, 115, 255, 0.2)',
+                      transform: 'translateY(-8px) scale(1.02)',
+                      border: '1px solid rgba(107, 115, 255, 0.3)',
+                    },
+                  }}
+                >
+                  <CardContent sx={{ 
+                    p: 3, 
+                    flexGrow: 1, 
+                    display: 'flex', 
+                    flexDirection: 'column',
+                    justifyContent: 'space-between',
+                    height: '100%',
+                  }}>
                     <Box
                       sx={{
                         display: 'flex',
                         alignItems: 'center',
                         mb: 3,
                         gap: 2,
+                        minHeight: '60px',
                       }}
                     >
                       <Box
                         sx={{
                           width: 50,
                           height: 50,
-                          borderRadius: '50%',
+                          borderRadius: '16px',
                           backgroundColor: category.color,
                           display: 'flex',
                           alignItems: 'center',
                           justifyContent: 'center',
                           color: 'white',
+                          flexShrink: 0,
                         }}
                       >
                         {category.icon}
@@ -145,60 +175,75 @@ const Skills = () => {
                       <Typography
                         variant="h5"
                         sx={{
-                          fontWeight: 500,
+                          fontWeight: 600,
                           color: 'text.primary',
+                          fontSize: '1.3rem',
+                          lineHeight: 1.3,
                         }}
                       >
                         {category.title}
                       </Typography>
                     </Box>
 
-                    <Stack spacing={3}>
-                      {category.skills.map((skill, skillIndex) => (
-                        <motion.div
-                          key={skill.name}
-                          initial={{ opacity: 0, x: -30 }}
-                          whileInView={{ opacity: 1, x: 0 }}
-                          transition={{ duration: 0.4, delay: skillIndex * 0.05 }}
-                          viewport={{ once: true }}
-                        >
-                          <Box sx={{ mb: 1 }}>
-                            <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
-                              <Typography
-                                variant="body1"
+                    <Box sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                      <Stack spacing={2.5}>
+                        {category.skills.map((skill, skillIndex) => (
+                          <motion.div
+                            key={skill.name}
+                            initial={{ opacity: 0, x: -30 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.4, delay: skillIndex * 0.05 }}
+                            viewport={{ once: true }}
+                          >
+                            <Box sx={{ mb: 1 }}>
+                              <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
+                                <Typography
+                                  variant="body1"
+                                  sx={{
+                                    color: 'text.primary',
+                                    fontWeight: 600,
+                                    fontSize: '0.95rem',
+                                  }}
+                                >
+                                  {skill.name}
+                                </Typography>
+                                <Typography
+                                  variant="body2"
+                                  sx={{
+                                    color: 'text.secondary',
+                                    fontWeight: 600,
+                                    fontSize: '0.85rem',
+                                  }}
+                                >
+                                  {skill.level}%
+                                </Typography>
+                              </Box>
+                              <Box 
                                 sx={{
-                                  color: 'text.primary',
-                                  fontWeight: 500,
+                                  width: '100%',
+                                  height: 10,
+                                  backgroundColor: 'rgba(107, 115, 255, 0.1)',
+                                  borderRadius: '8px',
+                                  overflow: 'hidden',
                                 }}
                               >
-                                {skill.name}
-                              </Typography>
-                              <Typography
-                                variant="body2"
-                                sx={{
-                                  color: 'text.secondary',
-                                  fontWeight: 500,
-                                }}
-                              >
-                                {skill.level}%
-                              </Typography>
+                                <motion.div
+                                  initial={{ width: 0 }}
+                                  whileInView={{ width: `${skill.level}%` }}
+                                  transition={{ duration: 1, delay: skillIndex * 0.1 }}
+                                  viewport={{ once: true }}
+                                  style={{
+                                    height: '100%',
+                                    background: `linear-gradient(90deg, ${category.color} 0%, ${category.color}CC 100%)`,
+                                    borderRadius: '8px',
+                                  }}
+                                />
+                              </Box>
                             </Box>
-                            <Box className="skill-bar">
-                              <motion.div
-                                className="skill-progress"
-                                initial={{ width: 0 }}
-                                whileInView={{ width: `${skill.level}%` }}
-                                transition={{ duration: 1, delay: skillIndex * 0.1 }}
-                                viewport={{ once: true }}
-                                style={{
-                                  background: `linear-gradient(90deg, ${category.color} 0%, ${category.color}80 100%)`,
-                                }}
-                              />
-                            </Box>
-                          </Box>
-                        </motion.div>
-                      ))}
-                    </Stack>
+                          </motion.div>
+                        ))}
+                      </Stack>
+                    </Box>
                   </CardContent>
                 </Card>
               </motion.div>
@@ -213,21 +258,21 @@ const Skills = () => {
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <Typography
+            <Typography
             variant="h3"
-            sx={{
-              textAlign: 'center',
+              sx={{
+                textAlign: 'center',
               mt: 8,
-              mb: 4,
+                mb: 4,
               fontWeight: 300,
-              color: 'text.primary',
-            }}
-          >
-            Certifications & <span className="gradient-text">Achievements</span>
-          </Typography>
+                color: 'text.primary',
+              }}
+            >
+              Certifications & <span className="gradient-text">Achievements</span>
+            </Typography>
           <Typography
             variant="body1"
-            sx={{
+              sx={{
               textAlign: 'center',
               color: 'text.secondary',
               mb: 6,
@@ -267,11 +312,11 @@ const Skills = () => {
               },
             ].map((cert, index) => (
               <Grid item xs={12} sm={6} md={3} key={cert.title}>
-                <motion.div
+                  <motion.div
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
-                  viewport={{ once: true }}
+                    viewport={{ once: true }}
                   whileHover={{ y: -5 }}
                 >
                   <Card
@@ -296,8 +341,8 @@ const Skills = () => {
                       </Typography>
                       <Typography
                         variant="body2"
-                        sx={{
-                          color: 'primary.main',
+                      sx={{
+                        color: 'primary.main',
                           fontWeight: 500,
                           mb: 1,
                         }}
@@ -309,21 +354,21 @@ const Skills = () => {
                         sx={{
                           color: 'text.secondary',
                           mb: 2,
-                          fontWeight: 500,
+                        fontWeight: 500,
                         }}
                       >
                         {cert.year}
                       </Typography>
-                      <Typography
+            <Typography
                         variant="body2"
-                        sx={{
-                          color: 'text.secondary',
+              sx={{
+                color: 'text.secondary',
                           lineHeight: 1.5,
                           fontSize: '0.875rem',
                         }}
                       >
                         {cert.description}
-                      </Typography>
+            </Typography>
                     </CardContent>
                   </Card>
                 </motion.div>
