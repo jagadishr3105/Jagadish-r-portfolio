@@ -39,7 +39,7 @@ const Hero = () => {
     },
     {
       icon: <Email />,
-      href: 'mailto:jagadishr3105@gmail.com',
+      href: 'mailto:jagadishr3195@gmail.com',
       label: 'Email',
       color: '#6B73FF',
     },
