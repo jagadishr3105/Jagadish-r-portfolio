@@ -27,7 +27,7 @@ const Hero = () => {
   const socialLinks = [
     {
       icon: <LinkedIn />,
-      href: 'https://linkedin.com/in/jagadish-r',
+      href: 'https://www.linkedin.com/in/jagadish-ravulapalli/',
       label: 'LinkedIn',
       color: '#0077B5',
     },
