@@ -201,9 +201,9 @@ This project is open source and available under the [MIT License](LICENSE).
 
 If you have questions or need help customizing the portfolio:
 
-- 📧 Email: your.email@example.com
-- 💼 LinkedIn: [Your LinkedIn Profile](https://linkedin.com/in/yourprofile)
-- 🐙 GitHub: [Your GitHub Profile](https://github.com/yourusername)
+- 📧 Email: jagadishr3195@gmail.com
+- 💼 LinkedIn: [https://www.linkedin.com/in/jagadish-ravulapalli/]
+- 🐙 GitHub: (https://github.com/jagadishr3105)
 
 ## 🙏 Acknowledgments
 
@@ -216,4 +216,3 @@ If you have questions or need help customizing the portfolio:
 
 **⭐ Star this repository if it helped you build your portfolio!**
 
-**🔗 Don't forget to add your live demo link and update the contact information!**
