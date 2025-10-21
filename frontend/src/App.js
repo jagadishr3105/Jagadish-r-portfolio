@@ -1,13 +1,11 @@
 import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { Box } from '@mui/material';
 import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import About from './components/About';
-import Projects from './components/Projects';
-import Contact from './components/Contact';
-import ScrollToTop from './components/ScrollToTop';
+import Home from './components/Home';
+import ArticleTemplate from './components/ArticleTemplate';
 import './App.css';
 
 const soothingTheme = createTheme({
@@ -103,31 +101,15 @@ function App() {
   return (
     <ThemeProvider theme={soothingTheme}>
       <CssBaseline />
-      <Box sx={{ minHeight: '100vh', backgroundColor: 'background.default', position: 'relative' }}>
-        {/* Soothing Background Elements */}
-        <div className="floating-shapes">
-          {[...Array(8)].map((_, i) => (
-            <div
-              key={i}
-              className="floating-shape"
-              style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-                animationDelay: `${Math.random() * 10}s`,
-                animationDuration: `${15 + Math.random() * 10}s`,
-                backgroundColor: ['#E8EAF6', '#F3E5F5', '#E0F2F1', '#FFF3E0'][Math.floor(Math.random() * 4)],
-              }}
-            />
-          ))}
-        </div>
-
-        <Navbar />
-        <Hero />
-        <About />
-        <Projects />
-        <Contact />
-        <ScrollToTop />
-      </Box>
+      <Router>
+        <Box sx={{ minHeight: '100vh', backgroundColor: 'background.default', position: 'relative' }}>
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/blog/:slug" element={<ArticleTemplate />} />
+          </Routes>
+        </Box>
+      </Router>
     </ThemeProvider>
   );
 }

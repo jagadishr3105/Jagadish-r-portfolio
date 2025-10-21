@@ -26,6 +26,7 @@ const Navbar = () => {
     { name: 'Home', href: '#home' },
     { name: 'About', href: '#about' },
     { name: 'Projects', href: '#projects' },
+    { name: 'Blog', href: '#blogs' },
     { name: 'Contact', href: '#contact' },
   ];
 
@@ -58,7 +59,7 @@ const Navbar = () => {
     link.download = 'Jagadish_R_Resume.pdf';
     document.body.appendChild(link);
     link.click();
-    document.body.removeChild(link);
+    link.remove();
   };
 
   const drawer = (
