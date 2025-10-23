@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Box,
   Container,
@@ -8,26 +8,58 @@ import {
   Button,
   Chip,
   Stack,
+  IconButton,
+  Pagination,
 } from '@mui/material';
 import {
   Article,
   OpenInNew,
   CalendarToday,
   Person,
+  ChevronLeft,
+  ChevronRight,
 } from '@mui/icons-material';
 import { motion } from 'framer-motion';
 import { getAllArticles } from '../data/blogData';
 
 const Blogs = () => {
-  // Get blog articles from data file
-  const blogs = getAllArticles().map(article => ({
-    ...article,
-    icon: <Article />,
-  }));
+  // Get blog articles from data file, sorted by date (newest first)
+  const allBlogs = getAllArticles()
+    .map(article => ({
+      ...article,
+      icon: <Article />,
+    }))
+    .sort((a, b) => new Date(b.publishDate) - new Date(a.publishDate));
+
+  // Pagination state
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 4;
+  const totalPages = Math.ceil(allBlogs.length / itemsPerPage);
+
+  // Get current page blogs
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentBlogs = allBlogs.slice(startIndex, endIndex);
 
   const handleBlogClick = (slug) => {
     // Open article in new tab
     window.open(`/blog/${slug}`, '_blank');
+  };
+
+  const handlePageChange = (event, page) => {
+    setCurrentPage(page);
+  };
+
+  const handlePrevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
   };
 
   return (
@@ -72,7 +104,7 @@ const Blogs = () => {
           </Typography>
 
           <Box className="blog-grid-container">
-            {blogs.map((blog, index) => (
+            {currentBlogs.map((blog, index) => (
               <Box 
                 key={blog.id} 
                 className="blog-grid-item"
@@ -103,6 +135,7 @@ const Blogs = () => {
                       boxShadow: '0 8px 32px rgba(107, 115, 255, 0.1)',
                       overflow: 'hidden',
                       flexGrow: 1,
+                      position: 'relative',
                       '&:hover': {
                         boxShadow: '0 16px 48px rgba(107, 115, 255, 0.2)',
                         transform: 'translateY(-8px) scale(1.02)',
@@ -111,6 +144,29 @@ const Blogs = () => {
                     }}
                     onClick={() => handleBlogClick(blog.slug)}
                   >
+                    {/* NEW Indicator */}
+                    {blog.isNew && (
+                      <Box
+                        sx={{
+                          position: 'absolute',
+                          top: 12,
+                          right: 12,
+                          zIndex: 1,
+                          background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                          color: 'white',
+                          px: 2,
+                          py: 0.5,
+                          borderRadius: '12px',
+                          fontSize: '0.75rem',
+                          fontWeight: 600,
+                          textTransform: 'uppercase',
+                          letterSpacing: '0.5px',
+                          boxShadow: '0 4px 12px rgba(102, 126, 234, 0.3)',
+                        }}
+                      >
+                        NEW
+                      </Box>
+                    )}
                     <CardContent sx={{ 
                       p: 3, 
                       flexGrow: 1, 
@@ -282,6 +338,68 @@ const Blogs = () => {
               </Box>
             ))}
           </Box>
+
+          {/* Pagination Controls */}
+          {totalPages > 1 && (
+            <Box
+              sx={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                mt: 6,
+                gap: 2,
+              }}
+            >
+              <IconButton
+                onClick={handlePrevPage}
+                disabled={currentPage === 1}
+                sx={{
+                  backgroundColor: currentPage === 1 ? 'rgba(0,0,0,0.1)' : 'primary.main',
+                  color: currentPage === 1 ? 'text.disabled' : 'white',
+                  '&:hover': {
+                    backgroundColor: currentPage === 1 ? 'rgba(0,0,0,0.1)' : 'primary.dark',
+                  },
+                  transition: 'all 0.3s ease',
+                }}
+              >
+                <ChevronLeft />
+              </IconButton>
+
+              <Pagination
+                count={totalPages}
+                page={currentPage}
+                onChange={handlePageChange}
+                color="primary"
+                sx={{
+                  '& .MuiPaginationItem-root': {
+                    color: 'text.primary',
+                    '&.Mui-selected': {
+                      backgroundColor: 'primary.main',
+                      color: 'white',
+                    },
+                    '&:hover': {
+                      backgroundColor: 'rgba(107, 115, 255, 0.1)',
+                    },
+                  },
+                }}
+              />
+
+              <IconButton
+                onClick={handleNextPage}
+                disabled={currentPage === totalPages}
+                sx={{
+                  backgroundColor: currentPage === totalPages ? 'rgba(0,0,0,0.1)' : 'primary.main',
+                  color: currentPage === totalPages ? 'text.disabled' : 'white',
+                  '&:hover': {
+                    backgroundColor: currentPage === totalPages ? 'rgba(0,0,0,0.1)' : 'primary.dark',
+                  },
+                  transition: 'all 0.3s ease',
+                }}
+              >
+                <ChevronRight />
+              </IconButton>
+            </Box>
+          )}
         </motion.div>
       </Container>
     </Box>

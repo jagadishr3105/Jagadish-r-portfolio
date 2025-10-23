@@ -14,6 +14,7 @@ import {
   useTheme,
 } from '@mui/material';
 import { Menu as MenuIcon, Close as CloseIcon, Download } from '@mui/icons-material';
+import { getAllArticles } from '../data/blogData';
 import { motion } from 'framer-motion';
 
 const Navbar = () => {
@@ -21,6 +22,9 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+
+  // Check for new blog posts
+  const hasNewBlog = getAllArticles().some(article => article.isNew);
 
   const navItems = [
     { name: 'Home', href: '#home' },
@@ -81,9 +85,39 @@ const Navbar = () => {
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.1 }}
+                  style={{ position: 'relative' }}
                 >
                   <Typography variant="h6" sx={{ color: 'text.primary', fontWeight: 400 }}>
                     {item.name}
+                    {/* New Blog Notification Indicator */}
+                    {item.name === 'Blog' && hasNewBlog && (
+                      <Box
+                        sx={{
+                          position: 'absolute',
+                          top: -2,
+                          right: -8,
+                          width: 8,
+                          height: 8,
+                          borderRadius: '50%',
+                          backgroundColor: '#ff4444',
+                          animation: 'pulse 2s infinite',
+                          '@keyframes pulse': {
+                            '0%': {
+                              transform: 'scale(1)',
+                              opacity: 1,
+                            },
+                            '50%': {
+                              transform: 'scale(1.2)',
+                              opacity: 0.7,
+                            },
+                            '100%': {
+                              transform: 'scale(1)',
+                              opacity: 1,
+                            },
+                          },
+                        }}
+                      />
+                    )}
                   </Typography>
                 </motion.div>
               }
@@ -207,6 +241,35 @@ const Navbar = () => {
                     }}
                   >
                     {item.name}
+                    {/* New Blog Notification Indicator */}
+                    {item.name === 'Blog' && hasNewBlog && (
+                      <Box
+                        sx={{
+                          position: 'absolute',
+                          top: 4,
+                          right: 4,
+                          width: 8,
+                          height: 8,
+                          borderRadius: '50%',
+                          backgroundColor: '#ff4444',
+                          animation: 'pulse 2s infinite',
+                          '@keyframes pulse': {
+                            '0%': {
+                              transform: 'scale(1)',
+                              opacity: 1,
+                            },
+                            '50%': {
+                              transform: 'scale(1.2)',
+                              opacity: 0.7,
+                            },
+                            '100%': {
+                              transform: 'scale(1)',
+                              opacity: 1,
+                            },
+                          },
+                        }}
+                      />
+                    )}
                   </Button>
                 </motion.div>
               ))}

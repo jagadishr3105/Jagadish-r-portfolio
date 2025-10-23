@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Box,
   Container,
@@ -11,7 +11,6 @@ import {
   CardContent,
   IconButton,
   Grid,
-  Paper,
 } from '@mui/material';
 import {
   ArrowBack,
@@ -32,6 +31,11 @@ const ArticleTemplate = () => {
   const { slug } = useParams();
   const article = getArticleBySlug(slug);
   const relatedArticles = getRelatedArticles(slug, 3);
+
+  // Scroll to top when component mounts or slug changes
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [slug]);
 
 
   const handleBackClick = () => {
@@ -60,8 +64,15 @@ const ArticleTemplate = () => {
     window.open(shareUrl, '_blank', 'width=600,height=400');
   };
 
-  const handleRelatedArticleClick = (relatedSlug) => {
-    navigate(`/blog/${relatedSlug}`);
+  const handleRelatedArticleClick = (relatedSlug, event) => {
+    // Add visual feedback and smooth transition
+    const clickedElement = event.currentTarget;
+    clickedElement.style.transform = 'scale(0.98)';
+    clickedElement.style.opacity = '0.8';
+    
+    setTimeout(() => {
+      navigate(`/blog/${relatedSlug}`);
+    }, 150);
   };
 
   if (!article) {
@@ -195,7 +206,7 @@ const ArticleTemplate = () => {
                     <Stack direction="row" spacing={1} sx={{ mb: 3, flexWrap: 'wrap' }}>
                       {article.tags.map((tag, index) => (
                         <Chip
-                          key={index}
+                          key={`tag-${tag}-${index}`}
                           label={tag}
                           size="small"
                           sx={{
@@ -234,13 +245,13 @@ const ArticleTemplate = () => {
                     }}
                   >
                     {article.content.split('\n').map((paragraph, index) => {
-                      if (paragraph.trim() === '') return <br key={index} />;
+                      if (paragraph.trim() === '') return <br key={`br-${index}`} />;
                       
                       // Check if it's a heading
                       if (paragraph.startsWith('## ')) {
                         return (
                           <Typography
-                            key={index}
+                            key={`paragraph-${index}`}
                             variant="h5"
                             sx={{
                               fontWeight: 600,
@@ -257,7 +268,7 @@ const ArticleTemplate = () => {
                       if (paragraph.startsWith('### ')) {
                         return (
                           <Typography
-                            key={index}
+                            key={`paragraph-${index}`}
                             variant="h6"
                             sx={{
                               fontWeight: 600,
@@ -275,7 +286,7 @@ const ArticleTemplate = () => {
                       if (paragraph.startsWith('- ')) {
                         return (
                           <Typography
-                            key={index}
+                            key={`paragraph-${index}`}
                             component="li"
                             variant="body1"
                             sx={{ fontSize: '1.1rem', mb: 1 }}
@@ -441,114 +452,142 @@ const ArticleTemplate = () => {
                   mb: 3,
                 }}
               >
-                <CardContent sx={{ p: 4 }}>
+                <CardContent sx={{ p: 6 }}>
                   <Typography
-                    variant="h6"
+                    variant="h5"
                     sx={{
                       fontWeight: 600,
                       color: 'text.primary',
-                      mb: 3,
+                      mb: 4,
+                      fontSize: '1.5rem',
                     }}
                   >
                     Related Posts
                   </Typography>
-                  <Stack spacing={3}>
-                    {relatedArticles.map((relatedArticle) => (
-                      <Paper
+                  <Stack spacing={4}>
+                    {relatedArticles.map((relatedArticle, index) => (
+                      <motion.div
                         key={relatedArticle.id}
-                        elevation={0}
-                        sx={{
-                          p: 2,
-                          cursor: 'pointer',
-                          border: '1px solid rgba(107, 115, 255, 0.1)',
-                          borderRadius: '12px',
-                          transition: 'all 0.3s ease',
-                          '&:hover': {
-                            borderColor: 'primary.main',
-                            transform: 'translateY(-2px)',
-                            boxShadow: '0 4px 20px rgba(107, 115, 255, 0.1)',
-                          },
-                        }}
-                        onClick={() => handleRelatedArticleClick(relatedArticle.slug)}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: index * 0.1 }}
                       >
-                        <Typography
-                          variant="subtitle2"
+                        <Card
+                          elevation={0}
                           sx={{
-                            fontWeight: 600,
-                            color: 'text.primary',
-                            mb: 1,
-                            lineHeight: 1.4,
+                            p: 3,
+                            cursor: 'pointer',
+                            border: '1px solid rgba(107, 115, 255, 0.1)',
+                            borderRadius: '16px',
+                            transition: 'all 0.3s ease',
+                            position: 'relative',
+                            overflow: 'hidden',
+                            background: 'rgba(255, 255, 255, 0.8)',
+                            backdropFilter: 'blur(10px)',
+                            '&:hover': {
+                              borderColor: 'primary.main',
+                              transform: 'translateY(-4px)',
+                              boxShadow: '0 8px 32px rgba(107, 115, 255, 0.15)',
+                              background: 'rgba(255, 255, 255, 0.95)',
+                            },
+                            '&:active': {
+                              transform: 'translateY(-2px)',
+                            },
                           }}
+                          onClick={(event) => handleRelatedArticleClick(relatedArticle.slug, event)}
                         >
-                          {relatedArticle.title}
-                        </Typography>
-                        <Typography
-                          variant="body2"
-                          sx={{
-                            color: 'text.secondary',
-                            fontSize: '0.9rem',
-                            lineHeight: 1.5,
-                          }}
-                        >
-                          {relatedArticle.brief.substring(0, 100)}...
-                        </Typography>
-                        <Stack direction="row" spacing={1} sx={{ mt: 1 }}>
-                          <Chip
-                            label={relatedArticle.category}
-                            size="small"
-                            sx={{
-                              backgroundColor: 'rgba(107, 115, 255, 0.1)',
-                              color: 'primary.main',
-                              fontSize: '0.7rem',
-                              height: '20px',
-                            }}
-                          />
+                          {/* NEW indicator for latest article */}
+                          {relatedArticle.isNew && (
+                            <Box
+                              sx={{
+                                position: 'absolute',
+                                top: 12,
+                                right: 12,
+                                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                                color: 'white',
+                                px: 2,
+                                py: 0.5,
+                                borderRadius: '12px',
+                                fontSize: '0.75rem',
+                                fontWeight: 600,
+                                textTransform: 'uppercase',
+                                letterSpacing: '0.5px',
+                                zIndex: 1,
+                                boxShadow: '0 4px 12px rgba(102, 126, 234, 0.3)',
+                              }}
+                            >
+                              NEW
+                            </Box>
+                          )}
+                          
                           <Typography
-                            variant="caption"
-                            sx={{ color: 'text.secondary', alignSelf: 'center' }}
+                            variant="h6"
+                            sx={{
+                              fontWeight: 600,
+                              color: 'text.primary',
+                              mb: 2,
+                              lineHeight: 1.4,
+                              fontSize: '1.1rem',
+                              pr: relatedArticle.isNew ? 8 : 0,
+                            }}
                           >
-                            {relatedArticle.readTime}
+                            {relatedArticle.title}
                           </Typography>
-                        </Stack>
-                      </Paper>
+                          <Typography
+                            variant="body1"
+                            sx={{
+                              color: 'text.secondary',
+                              fontSize: '1rem',
+                              lineHeight: 1.6,
+                              mb: 2,
+                            }}
+                          >
+                            {relatedArticle.brief.substring(0, 150)}...
+                          </Typography>
+                          
+                          {/* Tags and metadata */}
+                          <Stack direction="row" spacing={1} sx={{ mb: 2, flexWrap: 'wrap' }}>
+                            <Chip
+                              label={relatedArticle.category}
+                              size="small"
+                              sx={{
+                                backgroundColor: 'rgba(107, 115, 255, 0.1)',
+                                color: 'primary.main',
+                                fontSize: '0.8rem',
+                                height: '24px',
+                                fontWeight: 600,
+                              }}
+                            />
+                            <Chip
+                              icon={<AccessTime />}
+                              label={relatedArticle.readTime}
+                              size="small"
+                              sx={{
+                                backgroundColor: 'rgba(107, 115, 255, 0.08)',
+                                color: 'text.secondary',
+                                fontSize: '0.8rem',
+                                height: '24px',
+                              }}
+                            />
+                            <Chip
+                              icon={<CalendarToday />}
+                              label={relatedArticle.publishDate}
+                              size="small"
+                              sx={{
+                                backgroundColor: 'rgba(107, 115, 255, 0.08)',
+                                color: 'text.secondary',
+                                fontSize: '0.8rem',
+                                height: '24px',
+                              }}
+                            />
+                          </Stack>
+                        </Card>
+                      </motion.div>
                     ))}
                   </Stack>
                 </CardContent>
               </Card>
 
-              {/* Author Info */}
-              <Card
-                sx={{
-                  background: 'rgba(255, 255, 255, 0.95)',
-                  backdropFilter: 'blur(15px)',
-                  border: '1px solid rgba(107, 115, 255, 0.15)',
-                  borderRadius: '16px',
-                  boxShadow: '0 8px 32px rgba(107, 115, 255, 0.1)',
-                  overflow: 'hidden',
-                }}
-              >
-                <CardContent sx={{ p: 4, textAlign: 'center' }}>
-                  <Typography
-                    variant="h6"
-                    sx={{
-                      fontWeight: 600,
-                      color: 'text.primary',
-                      mb: 2,
-                    }}
-                  >
-                    About the Author
-                  </Typography>
-                  <Typography
-                    variant="body1"
-                    sx={{
-                      color: 'text.secondary',
-                      lineHeight: 1.6,
-                    }}
-                  >
-                    {article.author} is a passionate data scientist and quality engineer with expertise in machine learning, SQL optimization, and supply chain management. He writes about practical applications of data science in real-world scenarios.
-                  </Typography>
-                </CardContent>
-              </Card>
             </motion.div>
           </Grid>
         </Grid>

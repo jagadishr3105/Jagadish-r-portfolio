@@ -20,6 +20,7 @@ import {
   ListItemIcon,
   ListItemText,
   Divider,
+  Pagination,
 } from '@mui/material';
 import {
   GitHub,
@@ -30,12 +31,18 @@ import {
   TrendingUp,
   Assessment,
   Engineering,
+  ChevronLeft,
+  ChevronRight,
 } from '@mui/icons-material';
 import { motion } from 'framer-motion';
 
 const Projects = () => {
   const [selectedProject, setSelectedProject] = useState(null);
   const [openDialog, setOpenDialog] = useState(false);
+  
+  // Pagination state
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 4;
 
   const projects = [
     {
@@ -143,6 +150,28 @@ const Projects = () => {
     },
   ];
 
+  // Pagination logic
+  const totalPages = Math.ceil(projects.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentProjects = projects.slice(startIndex, endIndex);
+
+  const handlePageChange = (event, page) => {
+    setCurrentPage(page);
+  };
+
+  const handlePrevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
   const handleProjectClick = (project) => {
     setSelectedProject(project);
     setOpenDialog(true);
@@ -200,7 +229,7 @@ const Projects = () => {
           </Typography>
 
           <Grid container spacing={4} justifyContent="center" sx={{ width: '100%' }}>
-            {projects.map((project, index) => (
+            {currentProjects.map((project, index) => (
               <Grid item xs={12} sm={6} md={6} lg={6} key={project.id} sx={{ display: 'flex' }}>
               <motion.div
                   initial={{ opacity: 0, y: 30 }}
@@ -377,6 +406,68 @@ const Projects = () => {
             </Grid>
           ))}
         </Grid>
+
+        {/* Pagination Controls */}
+        {totalPages > 1 && (
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              mt: 6,
+              gap: 2,
+            }}
+          >
+            <IconButton
+              onClick={handlePrevPage}
+              disabled={currentPage === 1}
+              sx={{
+                backgroundColor: currentPage === 1 ? 'rgba(0,0,0,0.1)' : 'primary.main',
+                color: currentPage === 1 ? 'text.disabled' : 'white',
+                '&:hover': {
+                  backgroundColor: currentPage === 1 ? 'rgba(0,0,0,0.1)' : 'primary.dark',
+                },
+                transition: 'all 0.3s ease',
+              }}
+            >
+              <ChevronLeft />
+            </IconButton>
+
+            <Pagination
+              count={totalPages}
+              page={currentPage}
+              onChange={handlePageChange}
+              color="primary"
+              sx={{
+                '& .MuiPaginationItem-root': {
+                  color: 'text.primary',
+                  '&.Mui-selected': {
+                    backgroundColor: 'primary.main',
+                    color: 'white',
+                  },
+                  '&:hover': {
+                    backgroundColor: 'rgba(107, 115, 255, 0.1)',
+                  },
+                },
+              }}
+            />
+
+            <IconButton
+              onClick={handleNextPage}
+              disabled={currentPage === totalPages}
+              sx={{
+                backgroundColor: currentPage === totalPages ? 'rgba(0,0,0,0.1)' : 'primary.main',
+                color: currentPage === totalPages ? 'text.disabled' : 'white',
+                '&:hover': {
+                  backgroundColor: currentPage === totalPages ? 'rgba(0,0,0,0.1)' : 'primary.dark',
+                },
+                transition: 'all 0.3s ease',
+              }}
+            >
+              <ChevronRight />
+            </IconButton>
+          </Box>
+        )}
         </motion.div>
       </Container>
 
